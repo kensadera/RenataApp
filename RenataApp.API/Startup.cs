@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Renata.API.Data;
 using Microsoft.EntityFrameworkCore;
+using RenataApp.API.Data;
 
 namespace Renata.API
 {
@@ -31,6 +32,8 @@ namespace Renata.API
             (Configuration.GetConnectionString("DefaultConnection")));
              services.AddControllers();
              services.AddCors();
+             services.AddScoped<IAuthRepository,AuthRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
