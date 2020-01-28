@@ -26,6 +26,8 @@ namespace RenataApp.API.Controllers
 
         }
 
+     
+
         [HttpPost("register")]
 
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
@@ -44,6 +46,7 @@ namespace RenataApp.API.Controllers
             return StatusCode(201);
 
         }
+
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
