@@ -12,7 +12,8 @@ using RenataApp.API.Dto;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Controllers
-{
+{   
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -26,8 +27,8 @@ namespace RenataApp.API.Controllers
 
         }
 
-     
 
+        [AllowAnonymous]
         [HttpPost("register")]
 
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
@@ -47,7 +48,7 @@ namespace RenataApp.API.Controllers
 
         }
 
-
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
@@ -64,10 +65,10 @@ namespace RenataApp.API.Controllers
                 new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(_config.GetSection("AppSettings:Token").Value));
-
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+            
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -88,6 +89,8 @@ namespace RenataApp.API.Controllers
             });
 
         }
+
+       
 
     }
 }

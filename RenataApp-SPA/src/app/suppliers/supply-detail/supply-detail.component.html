@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+
+        <form method="post" #addForm="ngForm" (ngSubmit)="createSupplier()">
+          <h2 class="text-center text-primary">Add Supplier</h2>
+          <hr>
+        
+          <div class="form-group">
+            <input type="text" class="form-control" required [(ngModel)]="model.name" name="name"   placeholder="Supplier Name">
+          </div>
+      
+        
+          <div class="form-group text-center">
+            <button [disabled]="!addForm.dirty" form="addForm" class="btn btn-success" type="submit" (click)="createSupplier()">Add</button>
+            <button class="btn btn-default" type="button" (click)="cancel()"> Cancel </button>
+          </div>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -35,11 +35,13 @@ namespace Renata.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             services.AddDbContext<DataContext>(x => x.UseSqlite
+             services.AddDbContext<DataContext>(x => x.UseSqlServer
             (Configuration.GetConnectionString("DefaultConnection")));
-             services.AddControllers();
+             services.AddControllers().AddNewtonsoftJson();
              services.AddCors();
+             services.AddMvc(option => option.EnableEndpointRouting = false);
              services.AddScoped<IAuthRepository,AuthRepository>();
+             services.AddScoped<IPhoneRepository,PhoneRepository>();
              services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer( options => {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -85,12 +87,16 @@ namespace Renata.API
        //    app.UseHttpsRedirection();
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+             
+            app.UseMvc();
+
+            app.UseAuthentication();
+
+             app.UseAuthorization();
 
             app.UseRouting();
             
-            app.UseAuthorization();
-
-            app.UseAuthorization();
+               
 
             app.UseEndpoints(endpoints =>
             {

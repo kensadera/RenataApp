@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Renata.API.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 
 namespace RenataApp.API.Data
 {
@@ -78,7 +79,5 @@ namespace RenataApp.API.Data
 
        }
 
-
-       
     }
 }

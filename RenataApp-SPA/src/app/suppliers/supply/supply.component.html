@@ -1,0 +1,115 @@
+<div class="container">
+
+
+  
+ 
+  <form class="form-row" >
+    <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        
+             
+          <div class="form-group">
+            <label for="exampleFormControlSelect2">Supplier </label>
+            <select  class="form-control" [(ngModel)]="model.name" name="name">
+              <option *ngFor="let supplier of suppliers">{{supplier.name}}</option>
+            </select>
+          </div>
+
+      
+                    
+          
+          <div class="form-group">
+            <label for="exampleFormControlSelect2">Brand Name</label>
+            <select  class="form-control" [(ngModel)]="model.typename" name="typename">
+            <option *ngFor="let phonetype of phonetype" >{{phonetype.typename}}</option>
+            </select>
+          </div>
+
+        
+          <div class="form-group">
+            <label for="exampleFormControlSelect2">Model   </label>
+            <select   class="form-control" name="modelname" [(ngModel)]="model.modelname">
+            <option></option>
+            </select>
+          </div>
+          <div class="divider"></div>
+          <div class="form-group">
+            <label for="costprice"> Cost </label>
+            <input type="text" class="form-control" name="cost" [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
+            </div>
+
+          <div class="form-group">
+            <label for="imei">IMEI No. </label>
+            <input type="text" class="form-control" required [(ngModel)]="model.imei" name="imei"  placeholder="IMEI">
+            </div>
+
+            <div class="form-group">
+              <label for="datetime">Date </label>
+              <input type="datetime" class="form-control" [(ngModel)]="model.datetime" required name="datetime"  placeholder="Date">
+            </div>
+
+            <div class="divider mr-3"></div>
+          <div class="form-group text-center mt-4" >
+            <button class="btn btn-success btn-lg" type="submit" >Add</button>
+            </div>
+
+          
+
+      </div>
+    </div>
+  </div>
+  </form>
+
+
+
+  <form #supplyForm="ngForm" class="form-row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Supplier</th>
+                  <th scope="col">Brand Name</th>
+                  <th scope="col">Model</th>
+                  <th scope="col">Cost</th>
+                  <th scope="col">IMEI</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"></th>
+                <td>{{model.name}}</td>
+                <td>{{model.typename}}</td>
+                <td>{{model.brandname}}</td>
+                <td>{{model.cost}}</td>
+                <td>{{model.imei}}</td>
+                <td>{{model.datetime}}</td>
+                <button class="btn btn-success" type="submit" >Save</button>
+                <button class="btn btn-primary" type="submit" >Edit</button>
+                <button class="btn btn-danger" type="submit" >Delete</button>
+                </tr>
+              
+              </tbody>
+            </table>
+  
+          </div>
+        </div>
+      </div>
+  </form>
+
+
+
+
+
+</div>
+
+
+
+
+
+

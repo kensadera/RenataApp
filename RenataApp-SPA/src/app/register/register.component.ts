@@ -9,7 +9,6 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class RegisterComponent implements OnInit {
 model: any = {};
-@Input() valuesFromHome: any;
 @Output() cancelRegister = new EventEmitter();
 
 

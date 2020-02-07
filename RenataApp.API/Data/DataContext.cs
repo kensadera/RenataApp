@@ -1,6 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
-using Renata.API.Models;
+
 using RenataApp.API.Models;
 
 namespace Renata.API.Data
@@ -8,9 +8,16 @@ namespace Renata.API.Data
     public class DataContext : DbContext
     {
     public DataContext(DbContextOptions<DataContext> options): base(options){}
-						
-		public DbSet <Value> Values{get; set;}
     public DbSet<User> Users { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<Sale> Sales { get; set; }
+    public DbSet<Inventory> Inventories { get; set; }
+    public DbSet<Payment> Payments { get; set; }
+    public DbSet<PhoneModel> PhoneModels { get; set; }
+    public DbSet<PhoneType> PhoneTypes { get; set; }
+    public DbSet<Storage> Storages { get; set; }
+   
+    
 
     }
 }

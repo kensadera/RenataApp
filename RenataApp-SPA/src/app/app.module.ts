@@ -6,6 +6,7 @@ import { FormsModule  } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 
@@ -15,11 +16,19 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { SupplyComponent } from './supply/supply.component';
 import { ShopComponent } from './shop/shop.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { appRoutes } from './route';
+import { AlertifyService } from './_services/alertify.service';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { SupplyDetailComponent } from './suppliers/supply-detail/supply-detail.component';
+import { SupplyComponent } from './suppliers/supply/supply.component';
+import { AuthGuard } from './_guards/auth.guard';
 
+
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -27,9 +36,11 @@ import { appRoutes } from './route';
       NavComponent,
       HomeComponent,
       RegisterComponent,
-      SupplyComponent,
       ShopComponent,
-      InventoryComponent
+      InventoryComponent,
+      SupplyDetailComponent,
+      SupplyComponent
+
    ],
    imports: [
       BrowserModule,
@@ -39,9 +50,22 @@ import { appRoutes } from './route';
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+            // tslint:disable-next-line: object-literal-shorthand
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
+
    ],
    providers: [
-      AuthService
+      AuthService,
+      ErrorInterceptorProvider,
+      AlertifyService,
+      AuthGuard,
+
    ],
    bootstrap: [
       AppComponent
