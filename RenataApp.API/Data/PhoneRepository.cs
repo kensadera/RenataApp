@@ -24,6 +24,34 @@ namespace RenataApp.API.Data
              _context.Remove(entity);
         }
 
+        public async Task<PhoneModel> GetPhoneModel(int id)
+        {
+            var model = await _context.PhoneModels.FirstOrDefaultAsync(m => m.Id == id);
+
+            return model;
+        }
+
+        public async Task<IEnumerable<PhoneModel>> GetPhoneModels()
+        {
+            var models = await _context.PhoneModels.ToListAsync();
+
+            return models;
+        }
+
+        public async Task<PhoneType> GetPhoneBrand(int id)
+        {
+            var brand = await _context.PhoneTypes.FirstOrDefaultAsync(b => b.Id == id);
+
+            return brand;
+        }
+
+        public async Task<IEnumerable<PhoneType>> GetPhoneBrands()
+        {
+            var brands = await _context.PhoneTypes.ToListAsync();
+
+            return brands;
+        }
+
         public async Task<Supplier> GetSupplier(int id)
         {
            var supplier = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == id);

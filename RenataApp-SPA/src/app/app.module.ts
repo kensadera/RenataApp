@@ -24,6 +24,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { SupplyDetailComponent } from './suppliers/supply-detail/supply-detail.component';
 import { SupplyComponent } from './suppliers/supply/supply.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { PhonetypesComponent } from './suppliers/phonetypes/phonetypes.component';
 
 
 export function tokenGetter() {
@@ -39,7 +40,8 @@ export function tokenGetter() {
       ShopComponent,
       InventoryComponent,
       SupplyDetailComponent,
-      SupplyComponent
+      SupplyComponent,
+      PhonetypesComponent
 
    ],
    imports: [

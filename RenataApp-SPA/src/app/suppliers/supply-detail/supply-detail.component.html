@@ -1,4 +1,6 @@
 <div class="container">
+ <div class="row">
+
   <div class="col-4">
     <div class="card">
       <div class="card-body">
@@ -18,7 +20,67 @@
           </div>
         
         </form>
+
       </div>
     </div>
   </div>
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">   
+
+        <form method="post" #brandForm="ngForm" (ngSubmit)="createPhoneBrand()">
+          <h2 class="text-center text-primary">Add Phone brand</h2>
+          <hr>
+        
+          <div class="form-group">
+            <input type="text" class="form-control" required [(ngModel)]="model.brand" name="brand"   placeholder="Brand Name">
+          </div>
+      
+        
+          <div class="form-group text-center">
+            <button [disabled]="!brandForm.dirty" form="brandForm" class="btn btn-success" type="submit" (click)="createPhoneBrand()">Add</button>
+            <button class="btn btn-default" type="button" (click)="cancel()"> Cancel </button>
+          </div>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+
+
+        <form method="post" #modelForm="ngForm" (ngSubmit)="createPhoneModel()">
+        
+
+          <h2 class="text-center text-primary">Add Phone model</h2>
+          <hr>
+          <select  class="form-control" [(ngModel)]="model.typename" name="typenam">
+            <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
+          </select>
+        
+          <div class="form-group">
+            <input type="text" class="form-control" required [(ngModel)]="model.model" name="model"   placeholder="Model Name">
+          </div>
+      
+        
+          <div class="form-group text-center">
+            <button [disabled]="!modelForm.dirty" form="modelForm" class="btn btn-success" type="submit" (click)="createPhoneModel()">Add</button>
+            <button class="btn btn-default" type="button" (click)="cancel()"> Cancel </button>
+          </div>
+
+          </form>
+        
+    
+
+      </div>
+    </div>
+  </div> 
+
+ </div>
 </div>
+

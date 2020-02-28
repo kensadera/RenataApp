@@ -55,7 +55,7 @@ namespace RenataApp.API.Controllers
 
             return NoContent();
 
-            throw new Exception("Creating the message failed on save");
+            throw new Exception("Creating the supplier failed on save");
 
         }
 

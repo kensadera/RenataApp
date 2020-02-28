@@ -1,5 +1,5 @@
 export interface Phonetype {
     id: number;
-    typename: string;
+    typeName: string;
     userId: number;
 }

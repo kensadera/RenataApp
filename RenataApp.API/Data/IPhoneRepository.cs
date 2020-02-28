@@ -15,5 +15,9 @@ namespace RenataApp.API.Data
         Task<Supplier> GetSupplier(int id);  
         Task<User> GetUser(int id);
         Task<IEnumerable<User>> GetUsers();
+        Task<PhoneType> GetPhoneBrand(int id);
+        Task<IEnumerable<PhoneType>> GetPhoneBrands();
+        Task<PhoneModel> GetPhoneModel(int id);
+        Task<IEnumerable<PhoneModel>> GetPhoneModels();
     }
 }

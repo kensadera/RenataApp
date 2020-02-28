@@ -9,7 +9,7 @@ import { SupplyComponent } from './suppliers/supply/supply.component';
 
 export const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
-    {path: 'supply', component: SupplyComponent},
+    {path: 'supply', component: SupplyComponent, canActivate: [AuthGuard]},
     {path: 'supply/add', component: SupplyDetailComponent, canActivate: [AuthGuard]},
     {path: 'shop', component: ShopComponent, canActivate: [AuthGuard]},
     {path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard]},

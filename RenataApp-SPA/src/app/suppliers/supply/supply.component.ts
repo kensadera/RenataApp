@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { Supplier } from 'src/app/_models/supplier';
 import { NgForm } from '@angular/forms';
 import { Phonetype } from 'src/app/_models/phonetype';
+import { Phonemodel } from 'src/app/_models/phonemodel';
 
 @Component({
   selector: 'app-supply',
@@ -13,7 +14,9 @@ import { Phonetype } from 'src/app/_models/phonetype';
 })
 export class SupplyComponent implements OnInit {
 suppliers: Supplier[];
-@Input() phonetype: Phonetype[];
+@Input() phonetypes: Phonetype[];
+@Input() phonemodels: Phonemodel[];
+
 model: any = {};
 @ViewChild('supplyForm', { static: true}) supplyForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
@@ -28,11 +31,20 @@ unloadNotification($event: any) {
 
   ngOnInit() {
     this.loadSuppliers();
+    this.loadPhoneTypes();
   }
   loadSuppliers() {
     // tslint:disable-next-line: no-string-literal
     this.userService.getSuppliers().subscribe((suppliers: Supplier[]) => {
       this.suppliers = suppliers;
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+  loadPhoneTypes() {
+    // tslint:disable-next-line: no-string-literal
+    this.userService.getPhonetypes().subscribe((phonetypes: Phonetype[]) => {
+      this.phonetypes = phonetypes;
     }, error => {
       this.alertify.error(error);
     });

@@ -1,69 +1,65 @@
 <div class="container">
-
-
   
- 
-  <form class="form-row" >
-    <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        
+  
+   
+      <div class="row" >
+        <div class="card">
+          <div class="card-body">
+            <form class="form-row">
+                 
+              <div class="form-group">
+                <label for="exampleFormControlSelect2">Supplier </label>
+                <select  class="form-control" [(ngModel)]="model.name" name="name">
+                  <option *ngFor="let supplier of suppliers">{{supplier.name}}</option>
+                </select>
+              </div>
+    
+          
+              <div class="form-group">
+                <label for="exampleFormControlSelect2">Brand </label>
+                <select  class="form-control" [(ngModel)]="model.typename" name="typename">
+                  <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
+                </select>
+              </div>
              
-          <div class="form-group">
-            <label for="exampleFormControlSelect2">Supplier </label>
-            <select  class="form-control" [(ngModel)]="model.name" name="name">
-              <option *ngFor="let supplier of suppliers">{{supplier.name}}</option>
-            </select>
+    
+            
+              <div class="form-group">
+                <label for="exampleFormControlSelect2">Model   </label>
+                <select   class="form-control" name="modelname" [(ngModel)]="model.modelname">
+                <option></option>
+                </select>
+              </div>
+              <div class="divider"></div>
+              <div class="form-group">
+                <label for="costprice"> Cost </label>
+                <input type="text" class="form-control" name="cost" [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
+                </div>
+    
+              <div class="form-group">
+                <label for="imei">IMEI No. </label>
+                <input type="text" class="form-control" required [(ngModel)]="model.imei" name="imei"  placeholder="IMEI">
+                </div>
+    
+                <div class="form-group">
+                  <label for="datetime">Date </label>
+                  <input type="datetime" class="form-control" [(ngModel)]="model.datetime" required name="datetime"  placeholder="Date">
+                </div>
+    
+                <div class="divider mr-3"></div>
+              <div class="form-group text-center mt-4" >
+                <button class="btn btn-success btn-lg" type="submit" >Add</button>
+                </div>
+    
+              </form> 
+    
           </div>
-
-      
-                    
-          
-          <div class="form-group">
-            <label for="exampleFormControlSelect2">Brand Name</label>
-            <select  class="form-control" [(ngModel)]="model.typename" name="typename">
-            <option *ngFor="let phonetype of phonetype" >{{phonetype.typename}}</option>
-            </select>
-          </div>
-
-        
-          <div class="form-group">
-            <label for="exampleFormControlSelect2">Model   </label>
-            <select   class="form-control" name="modelname" [(ngModel)]="model.modelname">
-            <option></option>
-            </select>
-          </div>
-          <div class="divider"></div>
-          <div class="form-group">
-            <label for="costprice"> Cost </label>
-            <input type="text" class="form-control" name="cost" [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
-            </div>
-
-          <div class="form-group">
-            <label for="imei">IMEI No. </label>
-            <input type="text" class="form-control" required [(ngModel)]="model.imei" name="imei"  placeholder="IMEI">
-            </div>
-
-            <div class="form-group">
-              <label for="datetime">Date </label>
-              <input type="datetime" class="form-control" [(ngModel)]="model.datetime" required name="datetime"  placeholder="Date">
-            </div>
-
-            <div class="divider mr-3"></div>
-          <div class="form-group text-center mt-4" >
-            <button class="btn btn-success btn-lg" type="submit" >Add</button>
-            </div>
-
-          
-
+        </div>
       </div>
-    </div>
-  </div>
-  </form>
+    
 
 
-
-  <form #supplyForm="ngForm" class="form-row">
+    <form #supplyForm="ngForm" class="form-row">
       <div class="col-12">
         <div class="card">
           <div class="card-body">
@@ -101,12 +97,11 @@
         </div>
       </div>
   </form>
+  
+  
 
+  </div>
 
-
-
-
-</div>
 
 
 
