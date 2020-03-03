@@ -10,8 +10,8 @@ using Renata.API.Data;
 namespace Renata.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200302130252_ModifiedEntries")]
-    partial class ModifiedEntries
+    [Migration("20200303111759_ChangedEntries")]
+    partial class ChangedEntries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,8 +110,8 @@ namespace Renata.API.Migrations
                     b.Property<DateTime>("DateSupplied")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Imei")
-                        .HasColumnType("int");
+                    b.Property<string>("Imei")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PhoneTypeId")
                         .HasColumnType("int");
@@ -130,7 +130,7 @@ namespace Renata.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Phone");
+                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("RenataApp.API.Models.PhoneModel", b =>

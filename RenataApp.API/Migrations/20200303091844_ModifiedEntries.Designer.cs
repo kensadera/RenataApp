@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Renata.API.Data;
 
 namespace Renata.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200303091844_ModifiedEntries")]
+    partial class ModifiedEntries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,8 +110,8 @@ namespace Renata.API.Migrations
                     b.Property<DateTime>("DateSupplied")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Imei")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Imei")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PhoneTypeId")
                         .HasColumnType("int");

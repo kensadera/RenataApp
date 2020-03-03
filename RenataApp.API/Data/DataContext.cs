@@ -18,6 +18,7 @@ namespace Renata.API.Data
     public DbSet<Store> Stores { get; set; }
     public DbSet<SaleType> SaleTypes { get; set; }
     public DbSet<PayType> PayTypes { get; set; }
+    public DbSet<Phone> Phones { get; set; }
 
    
     

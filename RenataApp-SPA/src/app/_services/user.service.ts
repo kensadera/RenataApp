@@ -11,6 +11,7 @@ import { PhoneModel } from '../_models/phoneModel';
 import { SaleType } from '../_models/saleType';
 import { PayType } from '../_models/payType';
 import { Store } from '../_models/store';
+import { Phone } from '../_models/phone';
 
 
 @Injectable({
@@ -25,6 +26,7 @@ export class UserService {
   phonetype: PhoneType;
   phonemodel: PhoneModel;
   userId = this.authService.decodedToken.nameid;
+  model: any = {};
 
 
 
@@ -70,8 +72,8 @@ getPhoneModels(): Observable<PhoneModel[]> {
 }
 
 createPhoneModel(phonemodel: PhoneModel ) {
-  // phonemodel.phoneTypeId = this.phonetype.id;
-  return this.http.post(this.baseUrl + 'models/',  phonemodel );
+
+   return this.http.post(this.baseUrl + 'models/',  phonemodel );
 }
 
 
@@ -117,6 +119,12 @@ getStores(): Observable<Store[]> {
 createStore(store: Store ) {
   store.userId = this.authService.decodedToken.nameid;
   return this.http.post(this.baseUrl + 'stores/',  store );
+}
+
+
+createPhone(phone: Phone) {
+  phone.userId = this.authService.decodedToken.nameid;
+  return this.http.post(this.baseUrl + 'phones/', phone);
 }
 
 

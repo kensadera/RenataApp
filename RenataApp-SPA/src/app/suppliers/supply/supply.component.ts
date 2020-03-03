@@ -16,8 +16,8 @@ export class SupplyComponent implements OnInit {
 suppliers: Supplier[];
 phonetypes: PhoneType[];
 phonemodels: PhoneModel[];
-
 model: any = {};
+
 @ViewChild('supplyForm', { static: true}) supplyForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
@@ -60,5 +60,16 @@ unloadNotification($event: any) {
       this.alertify.error(error);
     });
   }
+
+  createPhone(model) {
+    this.userService.createPhone(this.model).subscribe(next => {
+    this.alertify.success('supply details added successfully');
+    this.supplyForm.reset();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+
 
 }

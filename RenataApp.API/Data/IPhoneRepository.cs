@@ -11,8 +11,9 @@ namespace RenataApp.API.Data
 
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
-        Task<IEnumerable<Supplier>> GetSuppliers();
+        
         Task<Supplier> GetSupplier(int id);  
+        Task<IEnumerable<Supplier>> GetSuppliers();
         Task<User> GetUser(int id);
         Task<IEnumerable<User>> GetUsers();
         Task<PhoneType> GetPhoneBrand(int id);
@@ -24,7 +25,10 @@ namespace RenataApp.API.Data
         Task<PayType> GetPaymentType(int id);
         Task<IEnumerable<PayType>> GetPaymentTypes();
         Task<Store> GetStore(int id); 
-        Task<IEnumerable<Store>> GetStores();   
+        Task<IEnumerable<Store>> GetStores(); 
+        Task<Phone> GetPhone(int id);
+        Task<IEnumerable<Phone>> GetPhones();
+
       
     }
 }

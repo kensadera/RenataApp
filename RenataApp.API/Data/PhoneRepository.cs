@@ -132,5 +132,20 @@ namespace RenataApp.API.Data
 
             return stores;
         }
+
+        public async Task<Phone> GetPhone(int id)
+        {
+        
+            var phone = await _context.Phones.FirstOrDefaultAsync(p => p.Id == id);
+
+            return phone;
+        }
+
+        public async Task<IEnumerable<Phone>> GetPhones()
+        {
+            var phones = await _context.Phones.ToListAsync();
+
+            return phones;
+        }
     }
 }

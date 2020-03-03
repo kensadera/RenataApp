@@ -54,7 +54,7 @@
       <div class="card-body">
 
 
-        <form method="post" #modelForm="ngForm" (ngSubmit)="createPhoneModel()">
+        <form method="POST" #modelForm="ngForm" (ngSubmit)="createPhoneModel()">
         
 
           <h2 class="text-center text-primary">Add Phone model</h2>
@@ -63,14 +63,14 @@
          
           <div class="form-group">
             <label for="brand">Brand </label>
-            <select  class="form-control" [(ngModel)]="model.type" name="type" >
+            <select  class="form-control"  >
               <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
             </select>
             <select  class="form-control" [(ngModel)]="model.phoneTypeId" name="phoneTypeId" >
               <option *ngFor="let phonetype of phonetypes">{{phonetype.id}}</option>
             </select>
           </div>
-        
+
           <div class="form-group">
             <input type="text" class="form-control" required [(ngModel)]="model.modelname" name="modelname"   placeholder="Model Name">
           </div>
