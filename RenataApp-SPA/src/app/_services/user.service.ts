@@ -6,8 +6,11 @@ import { Supplier } from '../_models/supplier';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../_models/user';
 import { AuthService } from './auth.service';
-import { Phonetype } from '../_models/phonetype';
-import { Phonemodel } from '../_models/phonemodel';
+import { PhoneType } from '../_models/phoneType';
+import { PhoneModel } from '../_models/phoneModel';
+import { SaleType } from '../_models/saleType';
+import { PayType } from '../_models/payType';
+import { Store } from '../_models/store';
 
 
 @Injectable({
@@ -19,8 +22,8 @@ export class UserService {
   decodedToken: any;
   user: User;
   supplier: Supplier;
-  phonetype: Phonetype;
-  phonemodel: Phonemodel;
+  phonetype: PhoneType;
+  phonemodel: PhoneModel;
   userId = this.authService.decodedToken.nameid;
 
 
@@ -41,30 +44,83 @@ createSupplier(supplier: Supplier ) {
   return this.http.post(this.baseUrl + 'suppliers/',  supplier );
 }
 
-getPhonetype(id): Observable<Phonetype> {
-  return this.http.get<Phonetype>(this.baseUrl + 'brands/' + id);
+
+
+getPhoneBrand(id): Observable<PhoneType> {
+  return this.http.get<PhoneType>(this.baseUrl + 'brands/' + id);
 }
 
-getPhonetypes(): Observable<Phonetype[]> {
-  return this.http.get<Phonetype[]>(this.baseUrl + 'brands');
+getPhoneBrands(): Observable<PhoneType[]> {
+  return this.http.get<PhoneType[]>(this.baseUrl + 'brands');
 }
 
-getPhonemodel(id): Observable<Phonemodel> {
-  return this.http.get<Phonemodel>(this.baseUrl + 'models/' + id);
-}
-
-getPhonemodels(): Observable<Phonemodel[]> {
-  return this.http.get<Phonemodel[]>(this.baseUrl + 'models');
-}
-
-createPhoneBrand(phonetype: Phonetype ) {
+createPhoneBrand(phonetype: PhoneType ) {
   phonetype.userId = this.authService.decodedToken.nameid;
   return this.http.post(this.baseUrl + 'brands/',  phonetype );
 }
 
-createPhoneModel(phonemodel: Phonemodel ) {
+
+
+getPhoneModel(id): Observable<PhoneModel> {
+  return this.http.get<PhoneModel>(this.baseUrl + 'models/' + id);
+}
+
+getPhoneModels(): Observable<PhoneModel[]> {
+  return this.http.get<PhoneModel[]>(this.baseUrl + 'models');
+}
+
+createPhoneModel(phonemodel: PhoneModel ) {
+  // phonemodel.phoneTypeId = this.phonetype.id;
   return this.http.post(this.baseUrl + 'models/',  phonemodel );
 }
+
+
+
+getSaleType(id): Observable<SaleType> {
+  return this.http.get<SaleType>(this.baseUrl + 'saletypes/' + id);
+}
+
+getSaleTypes(): Observable<SaleType[]> {
+  return this.http.get<SaleType[]>(this.baseUrl + 'saletypes');
+}
+
+createSaleType(saletype: SaleType ) {
+  saletype.userId = this.authService.decodedToken.nameid;
+  return this.http.post(this.baseUrl + 'saletypes/',  saletype );
+}
+
+
+
+getPayType(id): Observable<PayType> {
+  return this.http.get<PayType>(this.baseUrl + 'paytypes/' + id);
+}
+
+getPayTypes(): Observable<PayType[]> {
+  return this.http.get<PayType[]>(this.baseUrl + 'paytypes');
+}
+
+createPayType(paytype: PayType ) {
+  paytype.userId = this.authService.decodedToken.nameid;
+  return this.http.post(this.baseUrl + 'paytypes/',  paytype );
+}
+
+
+
+getStore(id): Observable<Store> {
+  return this.http.get<Store>(this.baseUrl + 'stores/' + id);
+}
+
+getStores(): Observable<Store[]> {
+  return this.http.get<Store[]>(this.baseUrl + 'stores');
+}
+
+createStore(store: Store ) {
+  store.userId = this.authService.decodedToken.nameid;
+  return this.http.post(this.baseUrl + 'stores/',  store );
+}
+
+
+
 
 
 

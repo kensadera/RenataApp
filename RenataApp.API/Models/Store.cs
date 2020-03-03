@@ -1,6 +1,6 @@
 namespace RenataApp.API.Models
 {
-    public class Storage
+    public class Store
     {
         
         public int Id { get; set; }

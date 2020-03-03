@@ -4,8 +4,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Supplier } from 'src/app/_models/supplier';
 import { NgForm } from '@angular/forms';
-import { Phonetype } from 'src/app/_models/phonetype';
-import { Phonemodel } from 'src/app/_models/phonemodel';
+import { PhoneType } from 'src/app/_models/phoneType';
+import { PhoneModel } from 'src/app/_models/phoneModel';
 
 @Component({
   selector: 'app-supply',
@@ -14,8 +14,8 @@ import { Phonemodel } from 'src/app/_models/phonemodel';
 })
 export class SupplyComponent implements OnInit {
 suppliers: Supplier[];
-@Input() phonetypes: Phonetype[];
-@Input() phonemodels: Phonemodel[];
+phonetypes: PhoneType[];
+phonemodels: PhoneModel[];
 
 model: any = {};
 @ViewChild('supplyForm', { static: true}) supplyForm: NgForm;
@@ -32,6 +32,7 @@ unloadNotification($event: any) {
   ngOnInit() {
     this.loadSuppliers();
     this.loadPhoneTypes();
+    this.loadPhoneModels();
   }
   loadSuppliers() {
     // tslint:disable-next-line: no-string-literal
@@ -41,10 +42,20 @@ unloadNotification($event: any) {
       this.alertify.error(error);
     });
   }
+
   loadPhoneTypes() {
     // tslint:disable-next-line: no-string-literal
-    this.userService.getPhonetypes().subscribe((phonetypes: Phonetype[]) => {
+    this.userService.getPhoneBrands().subscribe((phonetypes: PhoneType[]) => {
       this.phonetypes = phonetypes;
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  loadPhoneModels() {
+    // tslint:disable-next-line: no-string-literal
+    this.userService.getPhoneModels().subscribe((phonemodels: PhoneModel[]) => {
+      this.phonemodels = phonemodels;
     }, error => {
       this.alertify.error(error);
     });

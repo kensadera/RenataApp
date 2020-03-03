@@ -5,19 +5,25 @@
       <div class="row" >
         <div class="card">
           <div class="card-body">
-            <form class="form-row">
+            <form method="POST" #supplyForm="ngForm" class="form-row">
+
+              <div class="form-group">
+                <label for="datetime">Date </label>
+                <input type="datetime" class="form-control" [(ngModel)]="model.datetime" required name="datetime"  placeholder="Date">
+              </div>
                  
               <div class="form-group">
-                <label for="exampleFormControlSelect2">Supplier </label>
+                <label for="supplier">Supplier </label>
                 <select  class="form-control" [(ngModel)]="model.name" name="name">
-                  <option *ngFor="let supplier of suppliers">{{supplier.name}}</option>
+                  <option placeholder="Pick a supplier" *ngFor="let supplier of suppliers">{{supplier.name}}</option>
                 </select>
               </div>
+
     
           
               <div class="form-group">
-                <label for="exampleFormControlSelect2">Brand </label>
-                <select  class="form-control" [(ngModel)]="model.typename" name="typename">
+                <label for="brand">Brand </label>
+                <select  class="form-control" [(ngModel)]="model.typename" name="typename" >
                   <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
                 </select>
               </div>
@@ -25,30 +31,28 @@
     
             
               <div class="form-group">
-                <label for="exampleFormControlSelect2">Model   </label>
-                <select   class="form-control" name="modelname" [(ngModel)]="model.modelname">
-                <option></option>
+                <label for="model">Model   </label>
+                <select class="form-control" name="modelname" [(ngModel)]="model.modelname">
+                <option *ngFor="let phonemodel of phonemodels">{{phonemodel.modelName}}</option>
                 </select>
               </div>
               <div class="divider"></div>
-              <div class="form-group">
-                <label for="costprice"> Cost </label>
-                <input type="text" class="form-control" name="cost" [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
-                </div>
+             
     
               <div class="form-group">
                 <label for="imei">IMEI No. </label>
                 <input type="text" class="form-control" required [(ngModel)]="model.imei" name="imei"  placeholder="IMEI">
                 </div>
-    
+
                 <div class="form-group">
-                  <label for="datetime">Date </label>
-                  <input type="datetime" class="form-control" [(ngModel)]="model.datetime" required name="datetime"  placeholder="Date">
-                </div>
+                  <label for="costprice"> Cost </label>
+                  <input type="text" class="form-control" name="cost" [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
+                  </div>
+    
     
                 <div class="divider mr-3"></div>
               <div class="form-group text-center mt-4" >
-                <button class="btn btn-success btn-lg" type="submit" >Add</button>
+                <button class="btn btn-success btn-lg" type="submit" >Save</button>
                 </div>
     
               </form> 
@@ -59,7 +63,7 @@
     
 
 
-    <form #supplyForm="ngForm" class="form-row">
+    <form  class="form-row">
       <div class="col-12">
         <div class="card">
           <div class="card-body">
@@ -68,24 +72,27 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">Date</th>
                   <th scope="col">Supplier</th>
                   <th scope="col">Brand Name</th>
                   <th scope="col">Model</th>
-                  <th scope="col">Cost</th>
                   <th scope="col">IMEI</th>
-                  <th scope="col">Date</th>
+                  <th scope="col">Cost</th>
+                  
+                  
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row"></th>
-                <td>{{model.name}}</td>
-                <td>{{model.typename}}</td>
-                <td>{{model.brandname}}</td>
-                <td>{{model.cost}}</td>
-                <td>{{model.imei}}</td>
-                <td>{{model.datetime}}</td>
-                <button class="btn btn-success" type="submit" >Save</button>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
+               
                 <button class="btn btn-primary" type="submit" >Edit</button>
                 <button class="btn btn-danger" type="submit" >Delete</button>
                 </tr>

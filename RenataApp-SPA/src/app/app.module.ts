@@ -24,7 +24,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { SupplyDetailComponent } from './suppliers/supply-detail/supply-detail.component';
 import { SupplyComponent } from './suppliers/supply/supply.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { PhonetypesComponent } from './suppliers/phonetypes/phonetypes.component';
+import { SalesComponent } from './sales/sales.component';
 
 
 export function tokenGetter() {
@@ -41,8 +41,7 @@ export function tokenGetter() {
       InventoryComponent,
       SupplyDetailComponent,
       SupplyComponent,
-      PhonetypesComponent
-
+      SalesComponent
    ],
    imports: [
       BrowserModule,
@@ -60,6 +59,7 @@ export function tokenGetter() {
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
       })
+
 
    ],
    providers: [

@@ -90,5 +90,47 @@ namespace RenataApp.API.Data
         {
             _context.Update(entity);
         }
+
+        public async Task<SaleType> GetSaleType(int id)
+        {
+            var saleType = await _context.SaleTypes.FirstOrDefaultAsync(s => s.Id == id);
+
+            return saleType;
+        }
+
+        public async Task<IEnumerable<SaleType>> GetSaleTypes()
+        {
+            var saleTypes = await _context.SaleTypes.ToListAsync();
+
+            return saleTypes;
+        }
+
+        public async Task<PayType> GetPaymentType(int id)
+        {
+            var paymentType = await _context.PayTypes.FirstOrDefaultAsync(p => p.Id == id);
+             
+             return paymentType;
+        }
+
+        public async Task<IEnumerable<PayType>> GetPaymentTypes()
+        {
+           var payTypes = await _context.PayTypes.ToListAsync();
+
+           return payTypes;
+        }
+
+        public async Task<Store> GetStore(int id)
+        {
+            var store = await _context.Stores.FirstOrDefaultAsync( s => s.Id == id);
+
+            return store;
+        }
+
+        public async Task<IEnumerable<Store>> GetStores()
+        {
+            var stores = await _context.Stores.ToListAsync();
+
+            return stores;
+        }
     }
 }

@@ -3,9 +3,8 @@ import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { Supplier } from 'src/app/_models/supplier';
 import { NgForm } from '@angular/forms';
-import { Phonetype } from 'src/app/_models/phonetype';
+import { PhoneType } from 'src/app/_models/phoneType';
 
 @Component({
   selector: 'app-supply-detail',
@@ -13,16 +12,20 @@ import { Phonetype } from 'src/app/_models/phonetype';
   styleUrls: ['./supply-detail.component.css']
 })
 export class SupplyDetailComponent implements OnInit {
-phonetypes: Phonetype[];
+phonetypes: PhoneType[];
 
-@ViewChild('addForm', { static: true}) addForm: NgForm;
+@ViewChild('supplierForm', { static: true}) supplierForm: NgForm;
 @ViewChild('brandForm', { static: true}) brandForm: NgForm;
 @ViewChild('modelForm', { static: true}) modelForm: NgForm;
+@ViewChild('saleForm', { static: true}) saleForm: NgForm;
+@ViewChild('payForm', { static: true}) payForm: NgForm;
+@ViewChild('storeForm', { static: true}) storeForm: NgForm;
 model: any = {};
 
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
-  if (this.addForm.dirty || this.brandForm.dirty || this.modelForm.dirty) {
+  if (this.supplierForm.dirty || this.brandForm.dirty || this.modelForm.dirty ||
+    this.saleForm.dirty || this.payForm.dirty || this.storeForm.dirty) {
     $event.returnValue = true;
   }
 }
@@ -34,17 +37,18 @@ unloadNotification($event: any) {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadPhonetypes();
+    this.loadPhoneTypes();
   }
 
   createSupplier(model) {
     this.userService.createSupplier(this.model).subscribe(next => {
       this.alertify.success('Supplier added successfully');
-      this.addForm.reset();
+      this.supplierForm.reset();
     }, error => {
       this.alertify.error(error);
     });
   }
+
 
   createPhoneBrand(model) {
     this.userService.createPhoneBrand(this.model).subscribe(next => {
@@ -54,6 +58,7 @@ unloadNotification($event: any) {
       this.alertify.error(error);
     });
   }
+
 
   createPhoneModel(model) {
     this.userService.createPhoneModel(this.model).subscribe(next => {
@@ -65,9 +70,39 @@ unloadNotification($event: any) {
   }
 
 
+  createSaleType(model) {
+    this.userService.createSaleType(this.model).subscribe(next => {
+      this.alertify.success('Sale type added successfully');
+      this.saleForm.reset();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 
-  loadPhonetypes() {
-    this.userService.getPhonetypes().subscribe((phonetypes: Phonetype[]) => {
+
+  createPayType(model) {
+    this.userService.createPayType(this.model).subscribe(next => {
+      this.alertify.success('Pay type added successfully');
+      this.payForm.reset();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+
+  createStore(model) {
+    this.userService.createStore(this.model).subscribe(next => {
+      this.alertify.success('Storage location added successfully');
+      this.storeForm.reset();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+
+
+  loadPhoneTypes() {
+    this.userService.getPhoneBrands().subscribe((phonetypes: PhoneType[]) => {
       this.phonetypes = phonetypes;
     }, error => {
       this.alertify.error(error);
@@ -75,7 +110,12 @@ unloadNotification($event: any) {
   }
 
   cancel() {
-    this.addForm.reset(this.model);
+    this.supplierForm.reset(this.model);
+    this.brandForm.reset(this.model);
+    this.modelForm.reset(this.model);
+    this.saleForm.reset(this.model);
+    this.payForm.reset(this.model);
+    this.storeForm.reset(this.model);
   }
 
 

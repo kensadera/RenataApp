@@ -5,10 +5,18 @@ namespace RenataApp.API.Models
     public class Phone
     {
         public int Id { get; set; }
-        public DateTime DateSold { get; set; }
+        public DateTime DateSupplied { get; set; }
         public decimal Cost { get; set; }
 
         public int Imei { get; set; }
+
+
+        public Supplier Supplier { get; set; }
+        public int SupplierId { get; set; }
+
+        public PhoneType PhoneType { get; set; }
+        public int PhoneTypeId { get; set; }
+ 
 
         public User User { get; set; }
         public int UserId { get; set; }

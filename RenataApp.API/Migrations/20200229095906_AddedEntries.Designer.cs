@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Renata.API.Data;
 
 namespace Renata.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200229095906_AddedEntries")]
+    partial class AddedEntries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,17 +28,11 @@ namespace Renata.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("DateStocked")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Imei")
-                        .HasColumnType("int");
 
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
@@ -49,26 +45,6 @@ namespace Renata.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Inventories");
-                });
-
-            modelBuilder.Entity("RenataApp.API.Models.PayType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PayTypes");
                 });
 
             modelBuilder.Entity("RenataApp.API.Models.Payment", b =>
@@ -95,6 +71,26 @@ namespace Renata.API.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("RenataApp.API.Models.PaymentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PaymentTypes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PaymentTypes");
+                });
+
             modelBuilder.Entity("RenataApp.API.Models.Phone", b =>
                 {
                     b.Property<int>("Id")
@@ -105,26 +101,16 @@ namespace Renata.API.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("DateSupplied")
+                    b.Property<DateTime>("DateSold")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Imei")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PhoneTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PhoneTypeId");
-
-                    b.HasIndex("SupplierId");
 
                     b.HasIndex("UserId");
 
@@ -202,7 +188,7 @@ namespace Renata.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("SaleName")
+                    b.Property<string>("SaleTypes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -285,10 +271,10 @@ namespace Renata.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RenataApp.API.Models.PayType", b =>
+            modelBuilder.Entity("RenataApp.API.Models.PaymentType", b =>
                 {
                     b.HasOne("RenataApp.API.Models.User", "User")
-                        .WithMany("PayTypes")
+                        .WithMany("PaymentTypes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -296,14 +282,6 @@ namespace Renata.API.Migrations
 
             modelBuilder.Entity("RenataApp.API.Models.Phone", b =>
                 {
-                    b.HasOne("RenataApp.API.Models.PhoneType", "PhoneType")
-                        .WithMany()
-                        .HasForeignKey("PhoneTypeId");
-
-                    b.HasOne("RenataApp.API.Models.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-
                     b.HasOne("RenataApp.API.Models.User", "User")
                         .WithMany("Phones")
                         .HasForeignKey("UserId")

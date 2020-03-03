@@ -1,5 +1,5 @@
-export interface Phonemodel {
+export interface PhoneModel {
     id: number;
     modelName: string;
-    phonetypeId: number;
+    phoneTypeId: number;
 }
