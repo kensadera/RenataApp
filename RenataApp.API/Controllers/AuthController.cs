@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using RenataApp.API.Data;
-using RenataApp.API.Dto;
+using RenataApp.API.Dtos;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Controllers

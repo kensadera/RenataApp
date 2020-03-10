@@ -28,6 +28,10 @@ namespace RenataApp.API.Data
         Task<IEnumerable<Store>> GetStores(); 
         Task<Phone> GetPhone(int id);
         Task<IEnumerable<Phone>> GetPhones();
+        Task<Inventory> GetInventory(int id);
+        Task<IEnumerable<Inventory>> GetInventories();
+        Task<Sale> GetSale(int id);
+        Task<IEnumerable<Sale>> GetSales();
 
       
     }

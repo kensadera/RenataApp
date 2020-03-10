@@ -20,6 +20,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using RenataApp.API.Helpers;
+using AutoMapper;
 
 namespace Renata.API
 {
@@ -40,6 +41,7 @@ namespace Renata.API
              services.AddControllers().AddNewtonsoftJson();
              services.AddCors();
              services.AddMvc(option => option.EnableEndpointRouting = false);
+             services.AddAutoMapper(typeof(PhoneRepository).Assembly);
              services.AddScoped<IAuthRepository,AuthRepository>();
              services.AddScoped<IPhoneRepository,PhoneRepository>();
              services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -92,7 +94,7 @@ namespace Renata.API
 
             app.UseAuthentication();
 
-             app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseRouting();
             

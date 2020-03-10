@@ -9,12 +9,14 @@
 
               <div class="form-group">
                 <label for="datetime">Date </label>
-                <input type="datetime" class="form-control" [(ngModel)]="model.datetime" required name="datetime"  placeholder="Date">
+                <input type="text" bsDatepicker  [bsConfig]="bsConfig" 
+                      class="form-control"
+                      [(ngModel)]="model.date" required name="date"  placeholder="Date">
               </div>
                  
               <div class="form-group">
                 <label for="supplier">Supplier </label>
-                <select  class="form-control" [(ngModel)]="model.name" name="name">
+                <select  class="form-control placeholder" [(ngModel)]="model.name" name="name">
                   <option placeholder="Pick a supplier" *ngFor="let supplier of suppliers">{{supplier.name}}</option>
                 </select>
               </div>
@@ -23,7 +25,7 @@
           
               <div class="form-group">
                 <label for="brand">Brand </label>
-                <select  class="form-control" [(ngModel)]="model.typename" name="typename" >
+                <select  class="form-control" [(ngModel)]="model.typeName" name="typeName" >
                   <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
                 </select>
               </div>
@@ -32,7 +34,7 @@
             
               <div class="form-group">
                 <label for="model">Model   </label>
-                <select class="form-control" name="modelname" [(ngModel)]="model.modelname">
+                <select class="form-control" name="modelName" [(ngModel)]="model.modelName">
                 <option *ngFor="let phonemodel of phonemodels">{{phonemodel.modelName}}</option>
                 </select>
               </div>
@@ -52,7 +54,7 @@
     
                 <div class="divider mr-3"></div>
               <div class="form-group text-center mt-4" >
-                <button class="btn btn-success btn-lg" [disabled]="!supplyForm.dirty" form="supplyForm"  type="submit" (click)="createPhone()" >Save</button>
+                <button class="btn btn-success btn-lg" [disabled]="!supplyForm.dirty" form="supplyForm"  type="submit" (click)="createPhone()">Save</button>
                 </div>
     
               </form> 
@@ -63,47 +65,64 @@
     
 
 
-    <form  class="form-row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            
-            <table class="table table-striped">
-              <thead>
+ 
+       
+      
+    <div class="card">
+      <div class="card-body">  
+        <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <th scope="col"></th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
                   <th scope="col">Date</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>  
                   <th scope="col">Supplier</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
                   <th scope="col">Brand Name</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
                   <th scope="col">Model</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
                   <th scope="col">IMEI</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
                   <th scope="col">Cost</th>
                   
                   
                 </tr>
               </thead>
+       <div class="row"  *ngFor="let phone of phones">
+           <form  method="POST" class="form-row" #editForm="ngForm">    
+            <table class="table table-striped">
               <tbody>
-                <tr>
-                  <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                 <td></td> 
+                <td>{{phone.date |date}}</td>
+                <td>{{phone.name}}</td>
+                <td>{{phone.typeName}}</td>
+                <td>{{phone.modelName}}</td>
+                <td>{{phone.imei}}</td>
+                <td>{{phone.cost}}</td>
                 
-               
-                <button class="btn btn-primary" type="submit" >Edit</button>
-                <button class="btn btn-danger" type="submit" >Delete</button>
-                </tr>
+                <button class="btn btn-primary" form="editForm" type="submit"[routerLink]="['/supply/edit']" >Edit</button>
+                <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhone(phone.id)">Delete <i class="fa fa-trash-o"></i></button>
+             
               
               </tbody>
+             
             </table>
-  
+
+           </form>
+
           </div>
         </div>
       </div>
-  </form>
+
+
+  
   
   
 

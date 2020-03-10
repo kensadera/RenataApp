@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace RenataApp.API.Dto
+namespace RenataApp.API.Dtos
 {
     public class UserForRegisterDto
     {

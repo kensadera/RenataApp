@@ -1,10 +1,12 @@
-export interface Phone {
+export interface Sale {
     id: number;
     date: Date;
-    name: string;
+    saleType: string;
+    PayType: string;
     typeName: string;
     modelName: string;
     cost: any;
     imei: string;
+    isPaid: boolean;
     userId: number;
 }

@@ -1,10 +1,11 @@
-export interface Phone {
+export interface Inventory {
     id: number;
     date: Date;
-    name: string;
+    storeName: string;
     typeName: string;
     modelName: string;
     cost: any;
     imei: string;
+    inStock: boolean;
     userId: number;
 }

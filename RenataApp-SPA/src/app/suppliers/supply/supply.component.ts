@@ -6,6 +6,9 @@ import { Supplier } from 'src/app/_models/supplier';
 import { NgForm } from '@angular/forms';
 import { PhoneType } from 'src/app/_models/phoneType';
 import { PhoneModel } from 'src/app/_models/phoneModel';
+import { Phone } from 'src/app/_models/phone';
+import { ActivatedRoute } from '@angular/router';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-supply',
@@ -16,7 +19,10 @@ export class SupplyComponent implements OnInit {
 suppliers: Supplier[];
 phonetypes: PhoneType[];
 phonemodels: PhoneModel[];
+phones: Phone[];
 model: any = {};
+bsConfig: Partial<BsDatepickerConfig>;
+
 
 @ViewChild('supplyForm', { static: true}) supplyForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
@@ -25,40 +31,21 @@ unloadNotification($event: any) {
     $event.returnValue = true;
   }
 }
+
   constructor(private userService: UserService,
               private alertify: AlertifyService,
-              private authService: AuthService) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadSuppliers();
-    this.loadPhoneTypes();
-    this.loadPhoneModels();
-  }
-  loadSuppliers() {
-    // tslint:disable-next-line: no-string-literal
-    this.userService.getSuppliers().subscribe((suppliers: Supplier[]) => {
-      this.suppliers = suppliers;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
+    this.bsConfig = { containerClass: 'theme-red'},
 
-  loadPhoneTypes() {
-    // tslint:disable-next-line: no-string-literal
-    this.userService.getPhoneBrands().subscribe((phonetypes: PhoneType[]) => {
-      this.phonetypes = phonetypes;
-    }, error => {
-      this.alertify.error(error);
+    this.route.data.subscribe(data => {
+      this.suppliers = data.suppliers;
+      this.phonetypes = data.phonetypes;
+      this.phonemodels = data.phonemodels;
+      this.phones = data.phones;
     });
-  }
 
-  loadPhoneModels() {
-    // tslint:disable-next-line: no-string-literal
-    this.userService.getPhoneModels().subscribe((phonemodels: PhoneModel[]) => {
-      this.phonemodels = phonemodels;
-    }, error => {
-      this.alertify.error(error);
-    });
   }
 
   createPhone(model) {
@@ -70,6 +57,15 @@ unloadNotification($event: any) {
     });
   }
 
-
+  deletePhone(id: number) {
+    this.alertify.confirm('Are you sure you want to delete the supply detail?', () => {
+      this.userService.deletePhone(id).subscribe(() => {
+        this.phones.slice(this.phones.findIndex(p => p.id === id), 1);
+        this.alertify.success('Supply detail removed successfully');
+      }, error => {
+        this.alertify.error('failed to delele the supply details');
+      });
+    });
+  }
 
 }

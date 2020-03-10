@@ -1,4 +1,4 @@
-namespace RenataApp.API.Dto
+namespace RenataApp.API.Dtos
 {
     public class UserForLoginDto
     {

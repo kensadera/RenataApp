@@ -17,6 +17,7 @@ namespace RenataApp.API.Models
     public  ICollection<Inventory> Inventories	 { get; set; }
     public  ICollection<Phone> Phones	 { get; set; }
     public  ICollection<Store> Stores { get; set; }
+    public ICollection<Sale> Sales { get; set; }
         
     }
 }

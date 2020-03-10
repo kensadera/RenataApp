@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { SaleType } from '../_models/saleType';
 import { PayType } from '../_models/payType';
 import { PhoneType } from '../_models/phoneType';
 import { PhoneModel } from '../_models/phoneModel';
 import { UserService } from '../_services/user.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { Sale } from '../_models/sale';
 
 @Component({
   selector: 'app-sales',
@@ -16,50 +20,55 @@ saletypes: SaleType[];
 paytypes: PayType[];
 phonetypes: PhoneType[];
 phonemodels: PhoneModel[];
+sales: Sale[];
 model: any = {};
+bsConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private userService: UserService, private alertify: AlertifyService) { }
+@ViewChild('saleForm', { static: true}) saleForm: NgForm;
+@HostListener('window:beforeunload', ['$event'])
+unloadNotification($event: any) {
+  if (this.saleForm.dirty) {
+    $event.returnValue = true;
+  }
+}
+
+constructor(private userService: UserService,
+            private route: ActivatedRoute,
+            private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadSaleTypes();
-    this.loadPayTypes();
-    this.loadPhoneTypes();
-    this.loadPhoneModels();
+    this.bsConfig = { containerClass: 'theme-red'},
+
+    this.route.data.subscribe(data => {
+      this.saletypes = data.saletypes;
+      this.paytypes = data.paytypes;
+      this.phonetypes = data.phonetypes;
+      this.phonemodels = data.phonemodels;
+      this.sales = data.sales;
+    });
   }
 
-  loadPhoneTypes() {
-    // tslint:disable-next-line: no-string-literal
-    this.userService.getPhoneBrands().subscribe((phonetypes: PhoneType[]) => {
-      this.phonetypes = phonetypes;
+
+  createSale(model) {
+    this.userService.createSale(this.model).subscribe(next => {
+      this.alertify.success('Sale details added successfully');
+      this.saleForm.reset();
     }, error => {
       this.alertify.error(error);
     });
   }
 
-  loadSaleTypes() {
-    this.userService.getSaleTypes().subscribe((saletypes: SaleType[]) => {
-      this.saletypes = saletypes;
-    }, error => {
-      this.alertify.error(error);
+  deleteSale(id: number) {
+    this.alertify.confirm('Are you sure you want to delete the sales info?', () => {
+      this.userService.deleteSale(id).subscribe(() => {
+        this.sales.slice(this.sales.findIndex(p => p.id === id), 1);
+        this.alertify.success('Sale detail removed successfully');
+      }, error => {
+        this.alertify.error('failed to delele the sale details');
+      });
     });
   }
 
-  loadPayTypes() {
-    this.userService.getPayTypes().subscribe((paytypes: PayType[]) => {
-      this.paytypes = paytypes;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
-
-  loadPhoneModels() {
-    // tslint:disable-next-line: no-string-literal
-    this.userService.getPhoneModels().subscribe((phonemodels: PhoneModel[]) => {
-      this.phonemodels = phonemodels;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
 
 
 }

@@ -7,11 +7,11 @@ import { NgForm } from '@angular/forms';
 import { PhoneType } from 'src/app/_models/phoneType';
 
 @Component({
-  selector: 'app-supply-detail',
-  templateUrl: './supply-detail.component.html',
-  styleUrls: ['./supply-detail.component.css']
+  selector: 'app-app-detail',
+  templateUrl: './app-details.component.html',
+  styleUrls: ['./app-details.component.css']
 })
-export class SupplyDetailComponent implements OnInit {
+export class AppDetailsComponent implements OnInit {
 phonetypes: PhoneType[];
 
 @ViewChild('supplierForm', { static: true}) supplierForm: NgForm;
@@ -37,7 +37,9 @@ unloadNotification($event: any) {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadPhoneTypes();
+    this.route.data.subscribe(data => {
+      this.phonetypes = data.phonetypes;
+    });
   }
 
   createSupplier(model) {
@@ -99,15 +101,6 @@ unloadNotification($event: any) {
     });
   }
 
-
-
-  loadPhoneTypes() {
-    this.userService.getPhoneBrands().subscribe((phonetypes: PhoneType[]) => {
-      this.phonetypes = phonetypes;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
 
   cancel() {
     this.supplierForm.reset(this.model);

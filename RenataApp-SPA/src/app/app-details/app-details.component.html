@@ -64,7 +64,7 @@
           <div class="form-group">
             <label for="brand">Brand </label>
             <select  class="form-control"  >
-              <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
+              <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}{{phonetype.id}}</option>
             </select>
             <select  class="form-control" [(ngModel)]="model.phoneTypeId" name="phoneTypeId" >
               <option *ngFor="let phonetype of phonetypes">{{phonetype.id}}</option>

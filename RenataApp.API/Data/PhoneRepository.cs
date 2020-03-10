@@ -147,5 +147,33 @@ namespace RenataApp.API.Data
 
             return phones;
         }
+
+        public async Task<Inventory> GetInventory(int id)
+        {
+            var inventory = await _context.Inventories.FirstOrDefaultAsync(i => i.Id == id);
+
+            return inventory;
+        }
+
+        public async Task<IEnumerable<Inventory>> GetInventories()
+        {
+            var invetories = await _context.Inventories.ToListAsync();
+
+            return invetories;
+        }
+
+        public async Task<Sale> GetSale(int id)
+        {
+            var sale = await _context.Sales.FirstOrDefaultAsync(s => s.Id == id);
+
+            return sale;
+        }
+
+        public async Task<IEnumerable<Sale>> GetSales()
+        {
+           var sales = await _context.Sales.ToListAsync();
+
+           return sales;
+        }
     }
 }

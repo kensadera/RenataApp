@@ -10,7 +10,7 @@ using Renata.API.Data;
 namespace Renata.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200303111759_ChangedEntries")]
+    [Migration("20200304202009_ChangedEntries")]
     partial class ChangedEntries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,17 +31,23 @@ namespace Renata.API.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("DateStocked")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Imei")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Imei")
-                        .HasColumnType("int");
 
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ModelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -107,26 +113,25 @@ namespace Renata.API.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("DateSupplied")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Imei")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PhoneTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("ModelName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PhoneTypeId");
-
-                    b.HasIndex("SupplierId");
 
                     b.HasIndex("UserId");
 
@@ -180,19 +185,36 @@ namespace Renata.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateSold")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsSold")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("SalePrice")
+                    b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Imei")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PayType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SaleType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Sales");
                 });
@@ -298,14 +320,6 @@ namespace Renata.API.Migrations
 
             modelBuilder.Entity("RenataApp.API.Models.Phone", b =>
                 {
-                    b.HasOne("RenataApp.API.Models.PhoneType", "PhoneType")
-                        .WithMany()
-                        .HasForeignKey("PhoneTypeId");
-
-                    b.HasOne("RenataApp.API.Models.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-
                     b.HasOne("RenataApp.API.Models.User", "User")
                         .WithMany("Phones")
                         .HasForeignKey("UserId")
@@ -326,6 +340,15 @@ namespace Renata.API.Migrations
                 {
                     b.HasOne("RenataApp.API.Models.User", "User")
                         .WithMany("PhoneTypes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RenataApp.API.Models.Sale", b =>
+                {
+                    b.HasOne("RenataApp.API.Models.User", "User")
+                        .WithMany("Sales")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

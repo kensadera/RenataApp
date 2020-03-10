@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RenataApp.API.Data;
+using RenataApp.API.Dtos;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Controllers
@@ -11,14 +15,17 @@ namespace RenataApp.API.Controllers
     public class PhonesController : ControllerBase
     {
         private readonly IPhoneRepository _repo;
-        public PhonesController(IPhoneRepository repo)
+        private readonly IMapper _mapper;
+        public PhonesController(IPhoneRepository repo, IMapper mapper)
         {
+           
             _repo = repo;
+            _mapper = mapper;
 
 
         }
 
-         [HttpGet]
+        [HttpGet]
 
         public async Task<IActionResult> GetPhones()
         {
@@ -52,6 +59,36 @@ namespace RenataApp.API.Controllers
             throw new Exception("Saving the phone details failed");
 
         }
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePhone( int id, PhoneForUpdateDto phoneForUpdate)
+        {
+
+            var phoneFromRepo = await _repo.GetPhone(id);
+
+            _mapper.Map(phoneForUpdate, phoneFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating phone details failed on save");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhone(int id)
+        {
+                
+            var phone = await _repo.GetPhone(id);
+
+             _repo.Delete(phone);
+
+            await _repo.SaveAll();
+            return NoContent();
+
+            throw new Exception($"Deleting phone details failed");
+        }
+
 
 
     }

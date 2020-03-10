@@ -1,0 +1,38 @@
+<form method="POST" #editForm="ngForm" class="form-row" (ngSubmit)="updatePhone()">
+
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+       <form class="form-row" #editForm="ngForm" id="editForm" (ngSubmit)="updatePhone()" >
+            <div class="form-inline">
+              <label for="country">Supplier</label>
+              <input class="form-control" type="text" name="name" [(ngModel)]="phone.name">
+            </div>
+            <div class="form-inline">
+              <label for="country">Brand</label>
+              <input class="form-control" type="text" name="typeName" [(ngModel)]="phone.typeName">
+            </div>
+            <div class="form-inline">
+              <label for="country">Model</label>
+              <input class="form-control" type="text" name="modelName" [(ngModel)]="phone.modelName">
+            </div>
+            <div class="form-inline">
+              <label for="country">Imei</label>
+              <input class="form-control" type="text" name="imei" [(ngModel)]="phone.imei">
+            </div>
+            <div class="form-inline">
+              <label for="country">Cost</label>
+              <input class="form-control" type="text" name="cost" [(ngModel)]="phone.cost">
+            </div>
+  
+          
+             <div class="divider mr-2"></div>
+            <button class="btn btn-success" form="editForm" type="submit" (click)="updatePhone(phone.id)" >Save Changes</button>
+         </form>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  </form> 

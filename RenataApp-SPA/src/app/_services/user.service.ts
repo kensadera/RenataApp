@@ -12,6 +12,8 @@ import { SaleType } from '../_models/saleType';
 import { PayType } from '../_models/payType';
 import { Store } from '../_models/store';
 import { Phone } from '../_models/phone';
+import { Inventory } from '../_models/inventory';
+import { Sale } from '../_models/sale';
 
 
 @Injectable({
@@ -25,6 +27,8 @@ export class UserService {
   supplier: Supplier;
   phonetype: PhoneType;
   phonemodel: PhoneModel;
+  inventory: Inventory;
+  sale: Sale;
   userId = this.authService.decodedToken.nameid;
   model: any = {};
 
@@ -108,6 +112,7 @@ createPayType(paytype: PayType ) {
 
 
 
+
 getStore(id): Observable<Store> {
   return this.http.get<Store>(this.baseUrl + 'stores/' + id);
 }
@@ -122,10 +127,74 @@ createStore(store: Store ) {
 }
 
 
+
+getPhone(id): Observable<Phone> {
+  return this.http.get<Phone>(this.baseUrl + 'phones/' + id);
+}
+
+getPhones(): Observable<Phone[]> {
+  return this.http.get<Phone[]>(this.baseUrl + 'phones');
+}
+
 createPhone(phone: Phone) {
   phone.userId = this.authService.decodedToken.nameid;
   return this.http.post(this.baseUrl + 'phones/', phone);
 }
+
+updatePhone(phone: Phone) {
+  return this.http.put(this.baseUrl + 'phones/' + phone.id, phone);
+}
+
+deletePhone(id: number) {
+  return this.http.delete(this.baseUrl + 'phones/' + id);
+}
+
+
+
+getInventories(): Observable<Inventory[]> {
+  return this.http.get<Inventory[]>(this.baseUrl + 'inventories');
+}
+
+getInventory(id): Observable<Inventory> {
+  return this.http.get<Inventory>(this.baseUrl + 'inventories/' + id);
+}
+
+createInventory(inventory: Inventory ) {
+  inventory.userId = this.authService.decodedToken.nameid;
+  return this.http.post(this.baseUrl + 'inventories/',  inventory );
+}
+
+updateInventory(inventory: Inventory) {
+  return this.http.put(this.baseUrl + 'inventories/', inventory);
+}
+
+deleteInventory(id: number) {
+  return this.http.delete(this.baseUrl + 'inventories/' + id);
+}
+
+
+
+
+getSales(): Observable<Sale[]> {
+  return this.http.get<Sale[]>(this.baseUrl + 'sales');
+}
+
+getSale(id): Observable<Sale> {
+  return this.http.get<Sale>(this.baseUrl + 'sales/' + id);
+}
+
+createSale(sale: Sale ) {
+  sale.userId = this.authService.decodedToken.nameid;
+  return this.http.post(this.baseUrl + 'sales/',  sale );
+}
+updateSale(sale: Sale) {
+  return this.http.put(this.baseUrl + 'sales/', sale);
+}
+
+deleteSale(id: number) {
+  return this.http.delete(this.baseUrl + 'sales/' + id);
+}
+
 
 
 
