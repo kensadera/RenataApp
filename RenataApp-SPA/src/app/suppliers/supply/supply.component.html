@@ -107,7 +107,7 @@
                 <td>{{phone.imei}}</td>
                 <td>{{phone.cost}}</td>
                 
-                <button class="btn btn-primary" form="editForm" type="submit"[routerLink]="['/supply/edit']" >Edit</button>
+                <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/supply/edit', phone.id ]" >Edit</button>
                 <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhone(phone.id)">Delete <i class="fa fa-trash-o"></i></button>
              
               

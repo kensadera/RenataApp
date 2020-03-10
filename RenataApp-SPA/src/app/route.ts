@@ -26,7 +26,7 @@ export const appRoutes: Routes = [
                     phonemodels: ModelListResolver,
                     phones: PhoneListResolver},
            canActivate: [AuthGuard]},
-    {path: 'supply/edit', component: PhoneEditComponent},
+    {path: 'supply/edit', component: PhoneEditComponent, canActivate: [AuthGuard]},
     {path: 'detail/add', component: AppDetailsComponent,
                 resolve: {phonetypes: BrandListResolver},
                 canActivate: [AuthGuard]},

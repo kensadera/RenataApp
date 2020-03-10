@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core
 import { Phone } from 'src/app/_models/phone';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NgForm } from '@angular/forms';
 
@@ -12,7 +12,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./phone-edit.component.css']
 })
 export class PhoneEditComponent implements OnInit {
-phone: Phone;
+@Input() phone: Phone;
+
 @ViewChild('editForm', { static: true}) editForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
