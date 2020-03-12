@@ -10,7 +10,7 @@ using Renata.API.Data;
 namespace Renata.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200304202009_ChangedEntries")]
+    [Migration("20200311191441_ChangedEntries")]
     partial class ChangedEntries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,7 +122,7 @@ namespace Renata.API.Migrations
                     b.Property<string>("ModelName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("SupplierName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypeName")

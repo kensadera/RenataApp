@@ -127,7 +127,7 @@ namespace Renata.API.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "Name",
+                name: "SupplierName",
                 table: "Phones",
                 nullable: true);
 
@@ -233,7 +233,7 @@ namespace Renata.API.Migrations
                 table: "Phones");
 
             migrationBuilder.DropColumn(
-                name: "Name",
+                name: "SupplierName",
                 table: "Phones");
 
             migrationBuilder.DropColumn(

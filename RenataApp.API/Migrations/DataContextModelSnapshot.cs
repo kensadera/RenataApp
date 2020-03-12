@@ -120,7 +120,7 @@ namespace Renata.API.Migrations
                     b.Property<string>("ModelName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("SupplierName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypeName")

@@ -5,7 +5,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 
 
@@ -36,7 +36,7 @@ import { PayTypeListResolver } from './_resolvers/paytype-list.resolver';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { InventoryListResolver } from './_resolvers/inventory-list.resolver';
 import { SaleListResolver } from './_resolvers/sale-list.resolver';
-import { PhoneEditComponent } from './suppliers/supply/phone-edit/phone-edit.component';
+import { SupplyEditComponent } from './suppliers/supply-edit/supply-edit.component';
 
 
 
@@ -56,7 +56,7 @@ export function tokenGetter() {
       AppDetailsComponent,
       SupplyComponent,
       SalesComponent,
-      PhoneEditComponent
+      SupplyEditComponent
 
    ],
    imports: [

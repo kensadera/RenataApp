@@ -6,7 +6,7 @@ namespace RenataApp.API.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public string Name { get; set; }
+        public string SupplierName { get; set; }
         public string TypeName { get; set; }
         public string ModelName { get; set; }
         public decimal Cost { get; set; }

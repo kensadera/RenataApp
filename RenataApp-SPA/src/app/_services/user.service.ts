@@ -14,6 +14,7 @@ import { Store } from '../_models/store';
 import { Phone } from '../_models/phone';
 import { Inventory } from '../_models/inventory';
 import { Sale } from '../_models/sale';
+import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 
 
 @Injectable({
@@ -35,7 +36,9 @@ export class UserService {
 
 
 
-constructor(private http: HttpClient, private authService: AuthService) { }
+constructor(private http: HttpClient,
+            private authService: AuthService,
+            private route: ActivatedRoute) { }
 
 getSuppliers(): Observable<Supplier[]> {
   return this.http.get<Supplier[]>(this.baseUrl + 'suppliers');
@@ -141,8 +144,8 @@ createPhone(phone: Phone) {
   return this.http.post(this.baseUrl + 'phones/', phone);
 }
 
-updatePhone(phone: Phone) {
-  return this.http.put(this.baseUrl + 'phones/' + phone.id, phone);
+updatePhone(id: number, phone: Phone) {
+  return this.http.put(this.baseUrl + 'phones/' + id , phone );
 }
 
 deletePhone(id: number) {

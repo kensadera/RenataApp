@@ -15,7 +15,7 @@ import { SaleTypeListResolver } from './_resolvers/saletype-list.resolver';
 import { PayTypeListResolver } from './_resolvers/paytype-list.resolver';
 import { InventoryListResolver } from './_resolvers/inventory-list.resolver';
 import { SaleListResolver } from './_resolvers/sale-list.resolver';
-import { PhoneEditComponent } from './suppliers/supply/phone-edit/phone-edit.component';
+import { SupplyEditComponent } from './suppliers/supply-edit/supply-edit.component';
 
 
 export const appRoutes: Routes = [
@@ -26,7 +26,7 @@ export const appRoutes: Routes = [
                     phonemodels: ModelListResolver,
                     phones: PhoneListResolver},
            canActivate: [AuthGuard]},
-    {path: 'supply/edit', component: PhoneEditComponent, canActivate: [AuthGuard]},
+    {path: 'supply/edit', component: SupplyEditComponent, canActivate: [AuthGuard]},
     {path: 'detail/add', component: AppDetailsComponent,
                 resolve: {phonetypes: BrandListResolver},
                 canActivate: [AuthGuard]},

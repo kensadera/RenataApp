@@ -16,7 +16,7 @@
                  
               <div class="form-group">
                 <label for="supplier">Supplier </label>
-                <select  class="form-control placeholder" [(ngModel)]="model.name" name="name">
+                <select  class="form-control placeholder" [(ngModel)]="model.supplierName" name="supplierName">
                   <option placeholder="Pick a supplier" *ngFor="let supplier of suppliers">{{supplier.name}}</option>
                 </select>
               </div>
@@ -98,20 +98,25 @@
        <div class="row"  *ngFor="let phone of phones">
            <form  method="POST" class="form-row" #editForm="ngForm">    
             <table class="table table-striped">
-              <tbody>
-                 <td></td> 
-                <td>{{phone.date |date}}</td>
-                <td>{{phone.name}}</td>
-                <td>{{phone.typeName}}</td>
-                <td>{{phone.modelName}}</td>
-                <td>{{phone.imei}}</td>
-                <td>{{phone.cost}}</td>
+              <div class="row">
+                <div  class="col-9">
+                  <tbody>
+                    <td></td> 
+                   <td>{{phone.date |date}}</td>
+                   <td>{{phone.supplierName}}</td>
+                   <td>{{phone.typeName}}</td>
+                   <td>{{phone.modelName}}</td>
+                   <td>{{phone.imei}}</td>
+                   <td>{{phone.cost}}</td>   
+                 </tbody>
+                </div>
                 
-                <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/supply/edit', phone.id ]" >Edit</button>
-                <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhone(phone.id)">Delete <i class="fa fa-trash-o"></i></button>
-             
-              
-              </tbody>
+                <div class="col-3">
+                  <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/supply/edit', phone ]" >Edit</button>
+                  <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhone(phone.id)">Delete <i class="fa fa-trash-o"></i></button>
+                 </div> 
+                  
+              </div>
              
             </table>
 

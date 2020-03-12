@@ -1,7 +1,7 @@
 export interface Phone {
     id: number;
     date: Date;
-    name: string;
+    supplierName: string;
     typeName: string;
     modelName: string;
     cost: any;

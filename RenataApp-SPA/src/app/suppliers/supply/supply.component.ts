@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, Input, Output } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -22,6 +22,7 @@ phonemodels: PhoneModel[];
 phones: Phone[];
 model: any = {};
 bsConfig: Partial<BsDatepickerConfig>;
+@Output() phone: Phone;
 
 
 @ViewChild('supplyForm', { static: true}) supplyForm: NgForm;
