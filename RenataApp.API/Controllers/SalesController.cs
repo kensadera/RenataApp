@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RenataApp.API.Data;
+using RenataApp.API.Dtos;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Controllers
@@ -11,8 +13,10 @@ namespace RenataApp.API.Controllers
     public class SalesController : ControllerBase
     {
         private readonly IPhoneRepository _repo;
-        public SalesController(IPhoneRepository repo)
+        private readonly IMapper _mapper;
+        public SalesController(IPhoneRepository repo, IMapper mapper)
         {
+            _mapper = mapper;
             _repo = repo;
 
         }
@@ -52,7 +56,37 @@ namespace RenataApp.API.Controllers
             throw new Exception("Saving the sales detail failed");
 
         }
-   
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePhone(int id, SaleForUpdateDto saleForUpdateDto)
+        {
+
+            var saleFromRepo = await _repo.GetPhone(id);
+
+            _mapper.Map(saleForUpdateDto, saleFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating sale details failed on save");
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSale(int id)
+        {
+
+            var sale = await _repo.GetSale(id);
+
+            _repo.Delete(sale);
+
+            await _repo.SaveAll();
+            return NoContent();
+
+            throw new Exception($"Deleting sale details failed");
+        }
+
+
 
     }
 }

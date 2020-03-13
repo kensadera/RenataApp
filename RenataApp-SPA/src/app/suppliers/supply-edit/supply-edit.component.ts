@@ -4,6 +4,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-supply-edit',
@@ -12,6 +13,7 @@ import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 })
 export class SupplyEditComponent implements OnInit {
 phone: any;
+bsConfig: Partial<BsDatepickerConfig>;
 
 
 
@@ -28,6 +30,8 @@ unloadNotification($event: any) {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.bsConfig = { containerClass: 'theme-red'},
+
     this.loadPhone();
   }
 

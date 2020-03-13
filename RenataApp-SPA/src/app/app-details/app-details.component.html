@@ -118,32 +118,7 @@
   </div> 
 
 
-<div class="col-4">
- <div class="card">
-  <div class="card-body">
-  
-
-        <form method="post" #payForm="ngForm" (ngSubmit)="createPayType()">
-        
-
-          <h2 class="text-center text-primary">Add Pay Type</h2>
-          <hr>
-        
-          <div class="form-group">
-            <input type="text" class="form-control" required [(ngModel)]="model.payname" name="payname"   placeholder="Pay Type">
-          </div>
-      
-        
-          <div class="form-group text-center">
-            <button [disabled]="!payForm.dirty" form="payForm" class="btn btn-success" type="submit" (click)="createPayType()">Add</button>
-            <button class="btn btn-default" type="button" (click)="cancel()"> Cancel </button>
-          </div>
-
-          </form>
-
-      </div>
-    </div>
-  </div> 
+ 
 
 
 <div class="col-4">

@@ -9,7 +9,6 @@ import { AuthService } from './auth.service';
 import { PhoneType } from '../_models/phoneType';
 import { PhoneModel } from '../_models/phoneModel';
 import { SaleType } from '../_models/saleType';
-import { PayType } from '../_models/payType';
 import { Store } from '../_models/store';
 import { Phone } from '../_models/phone';
 import { Inventory } from '../_models/inventory';
@@ -99,23 +98,6 @@ createSaleType(saletype: SaleType ) {
 }
 
 
-
-getPayType(id): Observable<PayType> {
-  return this.http.get<PayType>(this.baseUrl + 'paytypes/' + id);
-}
-
-getPayTypes(): Observable<PayType[]> {
-  return this.http.get<PayType[]>(this.baseUrl + 'paytypes');
-}
-
-createPayType(paytype: PayType ) {
-  paytype.userId = this.authService.decodedToken.nameid;
-  return this.http.post(this.baseUrl + 'paytypes/',  paytype );
-}
-
-
-
-
 getStore(id): Observable<Store> {
   return this.http.get<Store>(this.baseUrl + 'stores/' + id);
 }
@@ -167,8 +149,8 @@ createInventory(inventory: Inventory ) {
   return this.http.post(this.baseUrl + 'inventories/',  inventory );
 }
 
-updateInventory(inventory: Inventory) {
-  return this.http.put(this.baseUrl + 'inventories/', inventory);
+updateInventory(id: number, inventory: Inventory) {
+  return this.http.put(this.baseUrl + 'inventories/' + id, inventory);
 }
 
 deleteInventory(id: number) {
@@ -190,8 +172,8 @@ createSale(sale: Sale ) {
   sale.userId = this.authService.decodedToken.nameid;
   return this.http.post(this.baseUrl + 'sales/',  sale );
 }
-updateSale(sale: Sale) {
-  return this.http.put(this.baseUrl + 'sales/', sale);
+updateSale(id: number, sale: Sale) {
+  return this.http.put(this.baseUrl + 'sales/' + id, sale);
 }
 
 deleteSale(id: number) {

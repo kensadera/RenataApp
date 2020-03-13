@@ -22,6 +22,7 @@ inventories: Inventory[];
 model: any = {};
 bsConfig: Partial<BsDatepickerConfig>;
 
+
 @ViewChild('inventoryForm', { static: true}) inventoryForm: NgForm;
 @ViewChild('editForm', { static: true}) editForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
@@ -34,17 +35,25 @@ unloadNotification($event: any) {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loadInventories();
     this.bsConfig = { containerClass: 'theme-red'},
 
     this.route.data.subscribe(data => {
       this.stores = data.stores;
       this.phonetypes = data.phonetypes;
       this.phonemodels = data.phonemodels;
-      this.inventories = data.inventories;
+     // this.inventories = data.inventories;
     });
 
   }
 
+    loadInventories() {
+      this.userService.getInventories().subscribe((inventories: Inventory[]) => {
+        this.inventories = inventories;
+      }, error => {
+        this.alertify.error(error);
+      });
+    }
 
   createInventory(model) {
     this.userService.createInventory(this.model).subscribe(next => {
@@ -57,7 +66,7 @@ unloadNotification($event: any) {
 
   deleteInventory(id: number) {
     this.alertify.confirm('Are you sure you want to delete the inventory detail?', () => {
-      this.userService.deletePhone(id).subscribe(() => {
+      this.userService.deleteInventory(id).subscribe(() => {
         this.inventories.slice(this.inventories.findIndex(p => p.id === id), 1);
         this.alertify.success('Shop detail removed successfully');
       }, error => {

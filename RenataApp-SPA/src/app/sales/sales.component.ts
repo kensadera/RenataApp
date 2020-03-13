@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { SaleType } from '../_models/saleType';
-import { PayType } from '../_models/payType';
 import { PhoneType } from '../_models/phoneType';
 import { PhoneModel } from '../_models/phoneModel';
 import { UserService } from '../_services/user.service';
@@ -17,7 +16,6 @@ import { Sale } from '../_models/sale';
 })
 export class SalesComponent implements OnInit {
 saletypes: SaleType[];
-paytypes: PayType[];
 phonetypes: PhoneType[];
 phonemodels: PhoneModel[];
 sales: Sale[];
@@ -39,12 +37,13 @@ constructor(private userService: UserService,
   ngOnInit() {
     this.bsConfig = { containerClass: 'theme-red'},
 
+    this.loadSales();
+
     this.route.data.subscribe(data => {
       this.saletypes = data.saletypes;
-      this.paytypes = data.paytypes;
       this.phonetypes = data.phonetypes;
       this.phonemodels = data.phonemodels;
-      this.sales = data.sales;
+     // this.sales = data.sales;
     });
   }
 
@@ -53,6 +52,14 @@ constructor(private userService: UserService,
     this.userService.createSale(this.model).subscribe(next => {
       this.alertify.success('Sale details added successfully');
       this.saleForm.reset();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  loadSales() {
+    this.userService.getSales().subscribe((sales: Sale[]) => {
+      this.sales = sales;
     }, error => {
       this.alertify.error(error);
     });

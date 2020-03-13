@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body">
+     
+     <form class="form-row" #editForm="ngForm" (ngSubmit)="updateSale()" >
+    
+          <div class="form-group">
+            <label for="datetime">Date </label>
+            <input type="text" bsDatepicker  [bsConfig]="bsConfig" 
+               class="form-control" name="date"
+               [(ngModel)]="sale.date">
+          </div>
+          
+          <div class="form-group">
+            <label for="country">Sale Type</label>
+            <input class="form-control" type="text" name="saleType" [(ngModel)]="sale.saleType">
+          </div>
+
+          <div class="form-group">
+            <label for="country">Brand</label>
+            <input class="form-control" type="text" name="typeName" [(ngModel)]="sale.typeName">
+          </div>
+
+          <div class="form-group">
+            <label for="country">Model</label>
+            <input class="form-control" type="text" name="modelName" [(ngModel)]="sale.modelName">
+          </div>
+          <div class="form-group">
+            <label for="country">Imei</label>
+            <input class="form-control" type="text" name="imei" [(ngModel)]="sale.imei">
+          </div>
+          <div class="form-group">
+            <label for="country">Cost</label>
+            <input class="form-control" type="text" name="price" [(ngModel)]="sale.price">
+          </div>
+          <div class="form-group">
+            <label for="country">Order No.</label>
+            <input class="form-control" type="text" name="order" [(ngModel)]="sale.order">
+          </div>
+          <div class="form-group">
+            <label for="country">Paid?</label>
+            <input class="form-control" type="checkbox" name="inStock" [(ngModel)]="sale.isPaid">
+          </div>
+
+        
+           <div class="divider mr-2"></div>
+          <button class="btn btn-success" form="editForm" type="submit" (click)="updateSale()"  >Save Changes</button>
+       </form>
+      
+
+    </div>
+  </div>
+</div>
+

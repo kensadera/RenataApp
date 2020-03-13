@@ -7,12 +7,12 @@ namespace RenataApp.API.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public string SaleType { get; set; }
-        public string PayType { get; set; }
         public string TypeName { get; set; }
         public string ModelName { get; set; }
         public string Imei { get; set; }
 
-        public decimal Cost { get; set; }
+        public decimal Price { get; set; }
+        public string Order { get; set; }
         public bool IsPaid { get; set; }
 
         public  User User { get; set; }

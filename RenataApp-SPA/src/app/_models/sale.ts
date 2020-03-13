@@ -2,11 +2,11 @@ export interface Sale {
     id: number;
     date: Date;
     saleType: string;
-    PayType: string;
     typeName: string;
     modelName: string;
-    cost: any;
+    price: any;
     imei: string;
+    order: string;
     isPaid: boolean;
     userId: number;
 }

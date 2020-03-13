@@ -13,6 +13,7 @@ import { PhoneType } from 'src/app/_models/phoneType';
 })
 export class AppDetailsComponent implements OnInit {
 phonetypes: PhoneType[];
+model: any = {};
 
 @ViewChild('supplierForm', { static: true}) supplierForm: NgForm;
 @ViewChild('brandForm', { static: true}) brandForm: NgForm;
@@ -20,8 +21,6 @@ phonetypes: PhoneType[];
 @ViewChild('saleForm', { static: true}) saleForm: NgForm;
 @ViewChild('payForm', { static: true}) payForm: NgForm;
 @ViewChild('storeForm', { static: true}) storeForm: NgForm;
-model: any = {};
-
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
   if (this.supplierForm.dirty || this.brandForm.dirty || this.modelForm.dirty ||
@@ -76,16 +75,6 @@ unloadNotification($event: any) {
     this.userService.createSaleType(this.model).subscribe(next => {
       this.alertify.success('Sale type added successfully');
       this.saleForm.reset();
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
-
-
-  createPayType(model) {
-    this.userService.createPayType(this.model).subscribe(next => {
-      this.alertify.success('Pay type added successfully');
-      this.payForm.reset();
     }, error => {
       this.alertify.error(error);
     });

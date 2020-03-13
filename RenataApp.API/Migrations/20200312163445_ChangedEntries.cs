@@ -59,12 +59,6 @@ namespace Renata.API.Migrations
                 name: "Description",
                 table: "Inventories");
 
-            migrationBuilder.AddColumn<decimal>(
-                name: "Cost",
-                table: "Sales",
-                nullable: false,
-                defaultValue: 0m);
-
             migrationBuilder.AddColumn<DateTime>(
                 name: "Date",
                 table: "Sales",
@@ -88,9 +82,15 @@ namespace Renata.API.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "PayType",
+                name: "Order",
                 table: "Sales",
                 nullable: true);
+
+            migrationBuilder.AddColumn<decimal>(
+                name: "Price",
+                table: "Sales",
+                nullable: false,
+                defaultValue: 0m);
 
             migrationBuilder.AddColumn<string>(
                 name: "SaleType",
@@ -189,10 +189,6 @@ namespace Renata.API.Migrations
                 table: "Sales");
 
             migrationBuilder.DropColumn(
-                name: "Cost",
-                table: "Sales");
-
-            migrationBuilder.DropColumn(
                 name: "Date",
                 table: "Sales");
 
@@ -209,7 +205,11 @@ namespace Renata.API.Migrations
                 table: "Sales");
 
             migrationBuilder.DropColumn(
-                name: "PayType",
+                name: "Order",
+                table: "Sales");
+
+            migrationBuilder.DropColumn(
+                name: "Price",
                 table: "Sales");
 
             migrationBuilder.DropColumn(

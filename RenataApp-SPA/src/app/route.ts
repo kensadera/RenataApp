@@ -12,10 +12,11 @@ import { ModelListResolver } from './_resolvers/model-list.resolver';
 import { PhoneListResolver } from './_resolvers/phone-list.resolver';
 import { StoreListResolver } from './_resolvers/store-list.resolver';
 import { SaleTypeListResolver } from './_resolvers/saletype-list.resolver';
-import { PayTypeListResolver } from './_resolvers/paytype-list.resolver';
 import { InventoryListResolver } from './_resolvers/inventory-list.resolver';
 import { SaleListResolver } from './_resolvers/sale-list.resolver';
 import { SupplyEditComponent } from './suppliers/supply-edit/supply-edit.component';
+import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
+import { SaleEditComponent } from './sales/sale-edit/sale-edit.component';
 
 
 export const appRoutes: Routes = [
@@ -36,13 +37,14 @@ export const appRoutes: Routes = [
                           phonemodels: ModelListResolver,
                           Inventories: InventoryListResolver },
                canActivate: [AuthGuard]},
+    {path: 'shop/edit', component: ShopEditComponent, canActivate: [AuthGuard]},
     {path: 'sales', component: SalesComponent,
                 resolve: { saletypes: SaleTypeListResolver,
-                           paytypes: PayTypeListResolver,
                            phonetypes: BrandListResolver,
                            phonemodels: ModelListResolver,
                            Sales: SaleListResolver },
                 canActivate: [AuthGuard]},
+    {path: 'sale/edit', component: SaleEditComponent, canActivate: [AuthGuard]},
     {path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard]},
     {path: '**', redirectTo: 'home', pathMatch : 'full'}
   ];

@@ -21,13 +21,6 @@
           </div>
 
           <div class="divider"></div>
-      
-          <div class="form-group">
-            <label for="payType">Pay Type </label>
-            <select  class="form-control" [(ngModel)]="model.payType" name="payType" >
-              <option *ngFor="let paytype of paytypes">{{paytype.payName}}</option>
-            </select>
-          </div>
          
           <div class="form-group">
             <label for="brand">Brand </label>
@@ -52,15 +45,16 @@
             </div>
 
             <div class="form-group">
-              <label for="costprice"> Cost </label>
-              <input type="text" class="form-control" [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
+              <label for="costprice"> Sale Price </label>
+              <input type="text" class="form-control" [(ngModel)]="model.price" required name="price"  placeholder="Price">
               </div>
 
-              <div class="divider mr-2"></div>
             <div class="form-group">
-              <label for="paid">Check if Paid  </label>
-              <input type="checkbox" class="form-control" [(ngModel)]="model.isPaid" required name="isPaid">
+              <label for="costprice"> Order No. </label>
+              <input type="text" class="form-control" [(ngModel)]="model.order" required name="order"  placeholder="Order No.">
               </div>
+
+            
 
 
             <div class="divider mr-3"></div>
@@ -88,9 +82,6 @@
                 <th scope="col">Sale Type</th>
                 <div class="divider mr-4"></div>
                 <div class="divider mr-4"></div>
-                <th scope="col">Pay Type</th>
-                <div class="divider mr-4"></div>
-                <div class="divider mr-4"></div>
                 <th scope="col">Brand Name</th>
                 <div class="divider mr-4"></div>
                 <div class="divider mr-4"></div>
@@ -101,6 +92,9 @@
                 <div class="divider mr-4"></div>
                 <div class="divider mr-4"></div>
                 <th scope="col">Cost</th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>
+                <th scope="col">Order No.</th>
                 <div class="divider mr-4"></div>
                 <th scope="col">Paid</th>
                 
@@ -114,14 +108,13 @@
                <td></td> 
               <td>{{sale.date |date}}</td>
               <td>{{sale.saleType}}</td>
-              <td>{{sale.PayType}}</td>
               <td>{{sale.typeName}}</td>
               <td>{{sale.modelName}}</td>
               <td>{{sale.imei}}</td>
-              <td>{{sale.cost}}</td>
+              <td>{{sale.price}}</td>
               <td>{{sale.isPaid}}</td>
               
-              <button class="btn btn-primary" form="editForm" type="submit"   [routerLink]="['/supply/edit/id']" >Edit</button>
+              <button class="btn btn-primary" form="editForm" type="submit"   [routerLink]="['/sale/edit', sale]" >Edit</button>
               <button class="btn btn-danger" form="editForm" type="submit" (click)="deleteSale(sale.id)">Delete <i class="fa fa-trash-o"></i></button>
            
             
@@ -134,6 +127,7 @@
         </div>
       </div>
     </div>
+
 
 
 

@@ -66,9 +66,68 @@
       </div>
     </div>
   
-<div *ngFor="let inventory of inventories">
-  {{inventory.id}}
-</div>
+    <div class="card">
+      <div class="card-body">  
+        <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
+                  <th scope="col">Date</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>  
+                  <th scope="col">Store</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
+                  <th scope="col">Brand Name</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
+                  <th scope="col">Model</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
+                  <th scope="col">IMEI</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
+                  <th scope="col">Cost</th>
+                  <div class="divider mr-4"></div>
+                  <div class="divider mr-4"></div>
+                  <th scope="col">In Stock</th>
+                  
+                  
+                </tr>
+              </thead>
+       <div class="row"  *ngFor="let inventory of inventories">
+           <form  method="POST" class="form-row" #editForm="ngForm">    
+            <table class="table table-striped">
+              <div class="row">
+                <div  class="col-9">
+                  <tbody>
+                    <td></td> 
+                   <td>{{inventory.date |date}}</td>
+                   <td>{{inventory.storeName}}</td>
+                   <td>{{inventory.typeName}}</td>
+                   <td>{{inventory.modelName}}</td>
+                   <td>{{inventory.imei}}</td>
+                   <td>{{inventory.cost}}</td>   
+                   <td>{{inventory.inStock}}</td>   
+                 </tbody>
+                </div>
+                
+                <div class="col-3">
+                  <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/shop/edit', inventory]" >Edit</button>
+                  <button class="btn btn-danger" form="editForm" type="submit" (click)="deleteInventory(inventory.id)">Delete <i class="fa fa-trash-o"></i></button>
+                 </div> 
+                  
+              </div>
+             
+            </table>
+
+           </form>
+
+          </div>
+        </div>
+      </div>
+
 
 </div>
 
