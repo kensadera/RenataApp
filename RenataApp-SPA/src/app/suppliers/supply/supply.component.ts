@@ -9,6 +9,7 @@ import { PhoneModel } from 'src/app/_models/phoneModel';
 import { Phone } from 'src/app/_models/phone';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-supply',
@@ -23,6 +24,8 @@ phones: Phone[];
 model: any = {};
 bsConfig: Partial<BsDatepickerConfig>;
 @Output() phone: Phone;
+phoneParams: any = {};
+pagination: Pagination;
 
 
 @ViewChild('supplyForm', { static: true}) supplyForm: NgForm;
@@ -44,9 +47,29 @@ unloadNotification($event: any) {
       this.suppliers = data.suppliers;
       this.phonetypes = data.phonetypes;
       this.phonemodels = data.phonemodels;
-      this.phones = data.phones;
+
+      this.phones = data.phones.result;
+      this.pagination = data.phones.pagination;
+
     });
 
+  }
+
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadPhones();
+  }
+
+  loadPhones() {
+    this.userService.getPhones(this.pagination.currentPage, this.pagination.itemsPerPage, this.phoneParams)
+    .subscribe(
+      (res: PaginatedResult<Phone[]>) => {
+      this.phones = res.result;
+      this.pagination = res.pagination;
+    },
+    error => {
+      this.alertify.error(error);
+    });
   }
 
   createPhone(model) {

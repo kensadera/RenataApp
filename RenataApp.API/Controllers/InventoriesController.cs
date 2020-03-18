@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RenataApp.API.Data;
 using RenataApp.API.Dtos;
+using RenataApp.API.Helpers;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Controllers
@@ -21,15 +23,19 @@ namespace RenataApp.API.Controllers
 
         }
 
-
         [HttpGet]
 
-        public async Task<IActionResult> GetInventories()
+        public async Task<IActionResult> GetInventories([FromQuery]InventoryParams inventoryParams)
         {
 
-            var inventories = await _repo.GetInventories();
+            var inventories = await _repo.GetInventories(inventoryParams);
 
-            return Ok(inventories);
+            var inventoriesToReturn = _mapper.Map<IEnumerable<InventoryForListDto>>(inventories);
+
+             Response.AddPagination(inventories.CurrentPage, inventories.PageSize,
+                inventories.TotalCount, inventories.TotalPages);
+
+            return Ok(inventoriesToReturn);
         }
 
         [HttpGet("{id}")]

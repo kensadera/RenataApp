@@ -1,1 +1,28 @@
-<p>inventory works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row"  *ngFor="let inventory of inventories">
+            <form  method="POST" class="form-row" #editForm="ngForm">    
+             <table class="table table-striped">
+               <div class="row">
+                 <div  class="col-9">
+                   <tbody>
+                     <td></td> 
+                    <td>{{inventory.date |date}}</td>
+                    <td>{{inventory.storeName}}</td>
+                    <td>{{inventory.typeName}}</td>
+                    <td>{{inventory.modelName}}</td>
+                    <td>{{inventory.imei}}</td>
+                    <td>{{inventory.cost}}</td>   
+                    <td>{{inventory.inStock}}</td>   
+                  </tbody>
+                 </div>
+                   
+               </div>
+              
+             </table>
+ 
+            </form>
+ 
+           </div>
+    </div>
+</div>

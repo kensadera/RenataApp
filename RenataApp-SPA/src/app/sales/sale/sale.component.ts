@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { SaleType } from '../_models/saleType';
-import { PhoneType } from '../_models/phoneType';
-import { PhoneModel } from '../_models/phoneModel';
-import { UserService } from '../_services/user.service';
-import { AlertifyService } from '../_services/alertify.service';
+import { SaleType } from '../../_models/saleType';
+import { PhoneType } from '../../_models/phoneType';
+import { PhoneModel } from '../../_models/phoneModel';
+import { UserService } from '../../_services/user.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
-import { Sale } from '../_models/sale';
+import { Sale } from '../../_models/sale';
 
 @Component({
   selector: 'app-sales',
-  templateUrl: './sales.component.html',
-  styleUrls: ['./sales.component.css']
+  templateUrl: './sale.component.html',
+  styleUrls: ['./sale.component.css']
 })
-export class SalesComponent implements OnInit {
+export class SaleComponent implements OnInit {
 saletypes: SaleType[];
 phonetypes: PhoneType[];
 phonemodels: PhoneModel[];

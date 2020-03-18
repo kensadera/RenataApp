@@ -58,10 +58,10 @@ namespace RenataApp.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePhone(int id, SaleForUpdateDto saleForUpdateDto)
+        public async Task<IActionResult> UpdateSale(int id, SaleForUpdateDto saleForUpdateDto)
         {
 
-            var saleFromRepo = await _repo.GetPhone(id);
+            var saleFromRepo = await _repo.GetSale(id);
 
             _mapper.Map(saleForUpdateDto, saleFromRepo);
 

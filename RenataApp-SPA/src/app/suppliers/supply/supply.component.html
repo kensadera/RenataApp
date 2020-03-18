@@ -95,43 +95,58 @@
                   
                 </tr>
               </thead>
-       <div class="row"  *ngFor="let phone of phones">
-           <form  method="POST" class="form-row" #editForm="ngForm">    
-            <table class="table table-striped">
-              <div class="row">
-                <div  class="col-9">
-                  <tbody>
-                    <td></td> 
-                   <td>{{phone.date |date}}</td>
-                   <td>{{phone.supplierName}}</td>
-                   <td>{{phone.typeName}}</td>
-                   <td>{{phone.modelName}}</td>
-                   <td>{{phone.imei}}</td>
-                   <td>{{phone.cost}}</td>   
-                 </tbody>
-                </div>
-                
-                <div class="col-3">
-                  <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/supply/edit', phone ]" >Edit</button>
-                  <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhone(phone.id)">Delete <i class="fa fa-trash-o"></i></button>
-                 </div> 
+              <div class="row"  *ngFor="let phone of phones">
+                <form  method="POST" class="form-row" #editForm="ngForm">    
+                 <table class="table table-striped">
+                   <div class="row">
+                     <div  class="col-9">
+                       <tbody>
+                         <td></td> 
+                        <td>{{phone.date |date}}</td>
+                        <td>{{phone.supplierName}}</td>
+                        <td>{{phone.typeName}}</td>
+                        <td>{{phone.modelName}}</td>
+                        <td>{{phone.imei}}</td>
+                        <td>{{phone.cost}}</td>    
+                      </tbody>
+                     </div>
+                     
+                     <div class="col-3">
+                       <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/supply/edit', phone]" >Edit</button>
+                       <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhone(phone.id)">Delete <i class="fa fa-trash-o"></i></button>
+                      </div> 
+                       
+                   </div>
+
+                 
                   
-              </div>
-             
-            </table>
+                 </table>
+     
+                </form>
+     
+               </div>
+    </div>
+   </div>
 
-           </form>
-
-          </div>
-        </div>
-      </div>
-
-
-  
-  
-  
-
+   <div class="d-flex justify-content-center">
+    <pagination [boundaryLinks]="true"
+                [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage"
+                [(ngModel)]="pagination.currentPage"
+                (pageChanged)= "pageChanged($event)"
+             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
   </div>
+     
+     
+</div>
+     
+            
+
+       
+ 
+
+  
 
 
 

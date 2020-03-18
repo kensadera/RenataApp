@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Supplier } from '../_models/supplier';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -14,6 +14,9 @@ import { Phone } from '../_models/phone';
 import { Inventory } from '../_models/inventory';
 import { Sale } from '../_models/sale';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { PaginatedResult } from '../_models/pagination';
+import { map } from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -38,6 +41,57 @@ export class UserService {
 constructor(private http: HttpClient,
             private authService: AuthService,
             private route: ActivatedRoute) { }
+
+
+getPhones(page?, itemsPerPage?, phoneParams?): Observable<PaginatedResult<Phone[]>> {
+  const paginatedResult: PaginatedResult<Phone[]> = new PaginatedResult<Phone[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  // if (phoneParams != null) {
+  //   params = params.append('phoneId', phoneParams.id);
+  //   params = params.append('orderBy', phoneParams.date);
+  // }
+
+  return this.http.get<Phone[]>(this.baseUrl + 'phones', {observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
+}
+
+getPhone(id): Observable<Phone> {
+  return this.http.get<Phone>(this.baseUrl + 'phones/' + id);
+}
+
+
+
+createPhone(phone: Phone) {
+  phone.userId = this.authService.decodedToken.nameid;
+  return this.http.post(this.baseUrl + 'phones/', phone);
+}
+
+updatePhone(id: number, phone: Phone) {
+  return this.http.put(this.baseUrl + 'phones/' + id , phone );
+}
+
+deletePhone(id: number) {
+  return this.http.delete(this.baseUrl + 'phones/' + id);
+}
+
+
+
+
 
 getSuppliers(): Observable<Supplier[]> {
   return this.http.get<Supplier[]>(this.baseUrl + 'suppliers');
@@ -111,33 +165,36 @@ createStore(store: Store ) {
   return this.http.post(this.baseUrl + 'stores/',  store );
 }
 
+// getInventories(): Observable<Inventory[]> {
+//   return this.http.get<Inventory[]>(this.baseUrl + 'inventories');
+// }
 
 
-getPhone(id): Observable<Phone> {
-  return this.http.get<Phone>(this.baseUrl + 'phones/' + id);
-}
+getInventories(page?, itemsPerPage?, inventoryParams?): Observable<PaginatedResult<Inventory[]>> {
+  const paginatedResult: PaginatedResult<Inventory[]> = new PaginatedResult<Inventory[]>();
 
-getPhones(): Observable<Phone[]> {
-  return this.http.get<Phone[]>(this.baseUrl + 'phones');
-}
+  let params = new HttpParams();
 
-createPhone(phone: Phone) {
-  phone.userId = this.authService.decodedToken.nameid;
-  return this.http.post(this.baseUrl + 'phones/', phone);
-}
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
 
-updatePhone(id: number, phone: Phone) {
-  return this.http.put(this.baseUrl + 'phones/' + id , phone );
-}
+  // if (inventoryParams != null) {
+  //   params = params.append('phoneId', inventoryParams.id);
+  //   params = params.append('orderBy', inventoryParams.date);
+  // }
 
-deletePhone(id: number) {
-  return this.http.delete(this.baseUrl + 'phones/' + id);
-}
-
-
-
-getInventories(): Observable<Inventory[]> {
-  return this.http.get<Inventory[]>(this.baseUrl + 'inventories');
+  return this.http.get<Inventory[]>(this.baseUrl + 'inventories', {observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
 }
 
 getInventory(id): Observable<Inventory> {

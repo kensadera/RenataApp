@@ -16,7 +16,7 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { ShopComponent } from './shop/shop.component';
+import { ShopComponent } from './shop/shop/shop.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { appRoutes } from './route';
 import { AlertifyService } from './_services/alertify.service';
@@ -24,7 +24,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AppDetailsComponent } from './app-details/app-details.component';
 import { SupplyComponent } from './suppliers/supply/supply.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { SalesComponent } from './sales/sales.component';
+import { SaleComponent } from './sales/sale/sale.component';
 import { UserService } from './_services/user.service';
 import { SupplierListResolver } from './_resolvers/supplier-list.resolver';
 import { BrandListResolver } from './_resolvers/brand-list.resolver';
@@ -38,6 +38,9 @@ import { SaleListResolver } from './_resolvers/sale-list.resolver';
 import { SupplyEditComponent } from './suppliers/supply-edit/supply-edit.component';
 import { ShopEditComponent } from './shop/shop-edit/shop-edit.component';
 import { SaleEditComponent } from './sales/sale-edit/sale-edit.component';
+import { SaleReportComponent } from './report/sale-report/sale-report.component';
+import { SupplyReportComponent } from './report/supply-report/supply-report.component';
+import { PaginationModule } from 'ngx-bootstrap';
 
 
 
@@ -56,11 +59,12 @@ export function tokenGetter() {
       InventoryComponent,
       AppDetailsComponent,
       SupplyComponent,
-      SalesComponent,
+      SaleComponent,
       SupplyEditComponent,
       ShopEditComponent,
-      SaleEditComponent
-
+      SaleEditComponent,
+      SaleReportComponent,
+      SupplyReportComponent
    ],
    imports: [
       BrowserModule,
@@ -70,6 +74,7 @@ export function tokenGetter() {
       ReactiveFormsModule,
       BrowserAnimationsModule,
       BsDatepickerModule.forRoot(),
+      PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({

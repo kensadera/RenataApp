@@ -9,6 +9,8 @@ namespace RenataApp.API.Helpers
         public AutoMapperProfiles()
         {
 
+            CreateMap<Phone, PhoneForListDto>();
+            CreateMap<Inventory, InventoryForListDto>();
           
             CreateMap<PhoneForUpdateDto, Phone>();
             CreateMap<InventoryForUpdateDto,Inventory>();

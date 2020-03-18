@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-body">
+
+<div class="container mt-3">
+
+    <form class="form-inline" #form="ngForm" (ngSubmit)="loadPhones()" novalidate>
+
+        <div class="form-group">
+          <label for="minAge">Supplier</label>
+          <input type="text" class="form-control ml-1" style="width: 70px" id="supplierName"
+          [(ngModel)]="phoneParams.supplierName"  name="supplierName?">
+        </div>
+
+        <button type="submit"  class="btn btn-primary" style="margin-left:10px" (click)="loadPhones()">Filter</button>
+        <button type="button"  class="btn btn-info" (click)= "resetFilters()" style="margin-left:10px">Reset Filter</button>
+
+
+        <div class="col">
+          <div class="btn-group">
+            <button type="button" (click)="loadPhones()" name="orderBy" class="btn btn-primary"
+            [(ngModel)]="phoneParams.date"  btnRadio="date">All</button>
+          </div>
+        </div>
+
+      </form>
+      <br>
+
+
+  
+    <div class="row" *ngFor="let phone of phones" class="col-lg-2 col-md-3 col-sm-6">
+      <form  method="POST" class="form-row" #editForm="ngForm">    
+        <table class="table table-striped">
+          <div class="row">
+            <div  class="col-9">
+              <tbody>
+                <td></td> 
+               <td>{{phone.date |date}}</td>
+               <td>{{phone.supplierName}}</td>
+               <td>{{phone.typeName}}</td>
+               <td>{{phone.modelName}}</td>
+               <td>{{phone.imei}}</td>
+               <td>{{phone.cost}}</td>   
+             </tbody>
+            </div> 
+            
+          </div>
+         
+        </table>
+ 
+       </form>
+    </div>
+  </div>
+
+
+<div class="d-flex justify-content-center">
+  <pagination [boundaryLinks]="true"
+              [totalItems]="pagination.totalItems"
+              [itemsPerPage]="pagination.itemsPerPage"
+              [(ngModel)]="pagination.currentPage"
+              (pageChanged)= "pageChanged($event)"
+           previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
+</div>
+
+</div>
+</div>

@@ -9,11 +9,13 @@ import { Phone } from '../_models/phone';
 
 @Injectable()
 export class PhoneListResolver implements Resolve<Phone[]> {
+  pageNumber = 1;
+  PageSize = 5;
 
   constructor(private userService: UserService, private alerfify: AlertifyService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Phone[]> {
-    return this.userService.getPhones().pipe(
+    return this.userService.getPhones(this.pageNumber, this.PageSize).pipe(
       catchError(error => {
         this.alerfify.error('Problem retrieving data');
         this.router.navigate(['/supply']);

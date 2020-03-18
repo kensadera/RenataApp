@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Renata.API.Data;
+using RenataApp.API.Helpers;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Data
@@ -141,18 +143,34 @@ namespace RenataApp.API.Data
             return phone;
         }
 
-        public async Task<IEnumerable<Phone>> GetPhones()
+            public async Task<PagedList<Phone>> GetPhones(PhoneParams phoneParams)
         {
-            var phones = await _context.Phones.ToListAsync();
+            var phones =  _context.Phones.OrderByDescending(p => p.Id).AsQueryable();
 
-            return phones;
+        //     phones = phones.Where(p => p.Id != phoneParams.PhoneId);
+
+            // phones = phones.Where(s => s.SupplierName == phoneParams.SupplierName);
+
+            // if (!string.IsNullOrEmpty(phoneParams.OrderBy))
+            //     phones = phones.OrderByDescending(p => p.Date);
+            
+
+            return await PagedList<Phone>.CreateAsync(phones, phoneParams.PageNumber, phoneParams.PageSize);
         }
+
 
         public async Task<Inventory> GetInventory(int id)
         {
             var inventory = await _context.Inventories.FirstOrDefaultAsync(i => i.Id == id);
 
             return inventory;
+        }
+        
+        public async Task<PagedList<Inventory>> GetInventories(InventoryParams inventoryParams)
+        {
+            var inventories = _context.Inventories.OrderByDescending(p=> p.Id).AsQueryable();
+
+             return await PagedList<Inventory>.CreateAsync(inventories, inventoryParams.PageNumber, inventoryParams.PageSize);
         }
 
         public async Task<IEnumerable<Inventory>> GetInventories()
@@ -175,5 +193,8 @@ namespace RenataApp.API.Data
 
            return sales;
         }
+
+    
+
     }
 }

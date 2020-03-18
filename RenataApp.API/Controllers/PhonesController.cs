@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RenataApp.API.Data;
 using RenataApp.API.Dtos;
+using RenataApp.API.Helpers;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Controllers
@@ -27,12 +28,17 @@ namespace RenataApp.API.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> GetPhones()
+        public async Task<IActionResult> GetPhones([FromQuery]PhoneParams phoneParams)
         {
 
-            var phones = await _repo.GetPhones();
+            var phones = await _repo.GetPhones(phoneParams);
 
-            return Ok(phones);
+            var phonesToReturn = _mapper.Map<IEnumerable<PhoneForListDto>>(phones);
+
+             Response.AddPagination(phones.CurrentPage, phones.PageSize,
+                phones.TotalCount, phones.TotalPages);
+
+            return Ok(phonesToReturn);
         }
 
         [HttpGet("{id}")]

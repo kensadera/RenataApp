@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using RenataApp.API.Helpers;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Data
@@ -27,9 +28,10 @@ namespace RenataApp.API.Data
         Task<Store> GetStore(int id); 
         Task<IEnumerable<Store>> GetStores(); 
         Task<Phone> GetPhone(int id);
-        Task<IEnumerable<Phone>> GetPhones();
+        Task<PagedList<Phone>> GetPhones(PhoneParams phoneParams);
         Task<Inventory> GetInventory(int id);
         Task<IEnumerable<Inventory>> GetInventories();
+        Task<PagedList<Inventory>> GetInventories(InventoryParams inventoryParams);
         Task<Sale> GetSale(int id);
         Task<IEnumerable<Sale>> GetSales();
 

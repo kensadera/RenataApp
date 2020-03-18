@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row"  *ngFor="let sale of sales">
+      <form  method="POST" class="form-row" #editForm="ngForm">    
+       <table class="table table-striped">
+         <tbody>
+            <td></td> 
+           <td>{{sale.date |date}}</td>
+           <td>{{sale.saleType}}</td>
+           <td>{{sale.typeName}}</td>
+           <td>{{sale.modelName}}</td>
+           <td>{{sale.imei}}</td>
+           <td>{{sale.price}}</td>
+           <td>{{sale.order}}</td>
+           <td>{{sale.isPaid}}</td>
+           
+         </tbody>
+        
+       </table>
+
+      </form>
+     </div>
+  </div>
+</div>

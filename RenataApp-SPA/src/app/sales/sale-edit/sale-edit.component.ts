@@ -15,6 +15,7 @@ export class SaleEditComponent implements OnInit {
   sale: any;
   bsConfig: Partial<BsDatepickerConfig>;
 
+
 @ViewChild('editForm', { static: true}) editForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
