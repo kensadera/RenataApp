@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RenataApp.API.Data;
 using RenataApp.API.Dtos;
+using RenataApp.API.Helpers;
 using RenataApp.API.Models;
 
 namespace RenataApp.API.Controllers
@@ -24,6 +26,8 @@ namespace RenataApp.API.Controllers
 
         [HttpGet]
 
+        [HttpGet]
+
         public async Task<IActionResult> GetSales()
         {
 
@@ -31,7 +35,7 @@ namespace RenataApp.API.Controllers
 
             return Ok(sales);
         }
-
+        
         [HttpGet("{id}")]
 
         public async Task<IActionResult> GetSale(int id)

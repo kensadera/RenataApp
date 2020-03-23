@@ -24,7 +24,6 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AppDetailsComponent } from './app-details/app-details.component';
 import { SupplyComponent } from './suppliers/supply/supply.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { SaleComponent } from './sales/sale/sale.component';
 import { UserService } from './_services/user.service';
 import { SupplierListResolver } from './_resolvers/supplier-list.resolver';
 import { BrandListResolver } from './_resolvers/brand-list.resolver';
@@ -41,6 +40,7 @@ import { SaleEditComponent } from './sales/sale-edit/sale-edit.component';
 import { SaleReportComponent } from './report/sale-report/sale-report.component';
 import { SupplyReportComponent } from './report/supply-report/supply-report.component';
 import { PaginationModule } from 'ngx-bootstrap';
+import { SaleComponent } from './sales/sale/sale.component';
 
 
 

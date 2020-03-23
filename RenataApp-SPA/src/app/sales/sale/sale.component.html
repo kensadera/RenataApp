@@ -101,41 +101,43 @@
                 
               </tr>
             </thead>
-     <div class="row"  *ngFor="let sale of sales">
-         <form  method="POST" class="form-row" #editForm="ngForm">    
-          <table class="table table-striped">
-            <tbody>
-               <td></td> 
-              <td>{{sale.date |date}}</td>
-              <td>{{sale.saleType}}</td>
-              <td>{{sale.typeName}}</td>
-              <td>{{sale.modelName}}</td>
-              <td>{{sale.imei}}</td>
-              <td>{{sale.price}}</td>
-              <td>{{sale.order}}</td>
-              <td>{{sale.isPaid}}</td>
-              
-              <button class="btn btn-primary" form="editForm" type="submit"   [routerLink]="['/sale/edit', sale]" >Edit</button>
-              <button class="btn btn-danger" form="editForm" type="submit" (click)="deleteSale(sale.id)">Delete <i class="fa fa-trash-o"></i></button>
-           
-            
-            </tbody>
-           
-          </table>
+            <div class="row"  *ngFor="let sale of sales">
+              <form  method="POST" class="form-row" #editForm="ngForm">    
+               <table class="table table-striped">
+                 <div class="row">
+                   <div  class="col-9">
+                     <tbody>
+                       <td></td> 
+                      <td>{{sale.date |date}}</td>
+                      <td>{{sale.saleType}}</td>
+                      <td>{{sale.typeName}}</td>
+                      <td>{{sale.modelName}}</td>
+                      <td>{{sale.imei}}</td>
+                      <td>{{sale.price}}</td>    
+                      <td>{{sale.order}}</td>    
+                      <td>{{sale.isPaid}}</td>    
+                    </tbody>
+                   </div>
+                   
+                   <div class="col-3">
+                     <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/sale/edit', sale]" >Edit</button>
+                     <button class="btn btn-danger" form="editForm" type="submit" (click)="deleteSale(sale.id)">Delete <i class="fa fa-trash-o"></i></button>
+                    </div> 
+                     
+                 </div>
 
-         </form>
-
-        </div>
-      </div>
-    </div>
-
-
-
-
+               
+                
+               </table>
+   
+              </form>
+   
+             </div>
+  </div>
+ </div>
+   
+   
 </div>
-
-
-
 
 
 

@@ -166,12 +166,6 @@ namespace RenataApp.API.Data
             return inventory;
         }
         
-        public async Task<PagedList<Inventory>> GetInventories(InventoryParams inventoryParams)
-        {
-            var inventories = _context.Inventories.OrderByDescending(p=> p.Id).AsQueryable();
-
-             return await PagedList<Inventory>.CreateAsync(inventories, inventoryParams.PageNumber, inventoryParams.PageSize);
-        }
 
         public async Task<IEnumerable<Inventory>> GetInventories()
         {
@@ -187,14 +181,12 @@ namespace RenataApp.API.Data
             return sale;
         }
 
+     
         public async Task<IEnumerable<Sale>> GetSales()
         {
            var sales = await _context.Sales.ToListAsync();
 
            return sales;
         }
-
-    
-
     }
 }

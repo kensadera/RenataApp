@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
+import { Sale } from '../_models/sale';
+import { Observable } from 'rxjs';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +41,6 @@ export class AuthService {
       return !this.jwthelper.isTokenExpired(token);
     }
 
-  }
+
+}
 

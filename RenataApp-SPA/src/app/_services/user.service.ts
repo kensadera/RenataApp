@@ -30,8 +30,6 @@ export class UserService {
   supplier: Supplier;
   phonetype: PhoneType;
   phonemodel: PhoneModel;
-  inventory: Inventory;
-  sale: Sale;
   userId = this.authService.decodedToken.nameid;
   model: any = {};
 
@@ -165,40 +163,16 @@ createStore(store: Store ) {
   return this.http.post(this.baseUrl + 'stores/',  store );
 }
 
-// getInventories(): Observable<Inventory[]> {
-//   return this.http.get<Inventory[]>(this.baseUrl + 'inventories');
-// }
 
 
-getInventories(page?, itemsPerPage?, inventoryParams?): Observable<PaginatedResult<Inventory[]>> {
-  const paginatedResult: PaginatedResult<Inventory[]> = new PaginatedResult<Inventory[]>();
 
-  let params = new HttpParams();
-
-  if (page != null && itemsPerPage != null) {
-    params = params.append('pageNumber', page);
-    params = params.append('pageSize', itemsPerPage);
-  }
-
-  // if (inventoryParams != null) {
-  //   params = params.append('phoneId', inventoryParams.id);
-  //   params = params.append('orderBy', inventoryParams.date);
-  // }
-
-  return this.http.get<Inventory[]>(this.baseUrl + 'inventories', {observe: 'response', params})
-    .pipe(
-      map(response => {
-        paginatedResult.result = response.body;
-        if (response.headers.get('Pagination') != null) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-        }
-        return paginatedResult;
-      })
-    );
-}
 
 getInventory(id): Observable<Inventory> {
   return this.http.get<Inventory>(this.baseUrl + 'inventories/' + id);
+}
+
+getInventories(): Observable<Inventory[]> {
+  return this.http.get<Inventory[]>(this.baseUrl + 'inventories');
 }
 
 createInventory(inventory: Inventory ) {
@@ -216,13 +190,12 @@ deleteInventory(id: number) {
 
 
 
+getSale(id): Observable<Sale> {
+  return this.http.get<Sale>(this.baseUrl + 'sales/' + id);
+}
 
 getSales(): Observable<Sale[]> {
   return this.http.get<Sale[]>(this.baseUrl + 'sales');
-}
-
-getSale(id): Observable<Sale> {
-  return this.http.get<Sale>(this.baseUrl + 'sales/' + id);
 }
 
 createSale(sale: Sale ) {

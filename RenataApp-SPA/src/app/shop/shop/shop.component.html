@@ -2,141 +2,131 @@
   
   
    
-    <div class="row" >
-      <div class="card">
-        <div class="card-body">
-          <form method="POST" #inventoryForm="ngForm" class="form-row" (ngSubmit)="createInventory()">
+  <div class="row" >
+    <div class="card">
+      <div class="card-body">
+        <form method="POST" #inventoryForm="ngForm" class="form-row" (ngSubmit)="createInventory()">
 
-            <div class="form-group">
-              <label for="datetime">Date </label>
-              <input type="text" bsDatepicker  [bsConfig]="bsConfig" class="form-control" 
-                     [(ngModel)]="model.date" required name="date"  placeholder="Date">
-            </div>
-               
-            <div class="form-group">
-              <label for="store">Storage location </label>
-              <select  class="form-control" [(ngModel)]="model.storeName" name="storeName">
-                <option placeholder="Storage Location" *ngFor="let store of stores">{{store.storeName}}</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="datetime">Date </label>
+            <input type="text" bsDatepicker  [bsConfig]="bsConfig" class="form-control" 
+                   [(ngModel)]="model.date" required name="date"  placeholder="Date">
+          </div>
+             
+          <div class="form-group">
+            <label for="store">Storage location </label>
+            <select  class="form-control" [(ngModel)]="model.storeName" name="storeName">
+              <option placeholder="Storage Location" *ngFor="let store of stores">{{store.storeName}}</option>
+            </select>
+          </div>
 
-  
+
+      
+          <div class="form-group">
+            <label for="brand">Brand </label>
+            <select  class="form-control" [(ngModel)]="model.typeName" name="typeName" >
+              <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
+            </select>
+          </div>
+         
+
         
-            <div class="form-group">
-              <label for="brand">Brand </label>
-              <select  class="form-control" [(ngModel)]="model.typeName" name="typeName" >
-                <option *ngFor="let phonetype of phonetypes">{{phonetype.typeName}}</option>
-              </select>
-            </div>
-           
-  
-          
-            <div class="form-group">
-              <label for="model">Model   </label>
-              <select   class="form-control" name="modelName" [(ngModel)]="model.modelName">
-              <option *ngFor="let phonemodel of phonemodels">{{phonemodel.modelName}}</option>
-              </select>
-            </div>
-            <div class="divider"></div>
-           
-  
-            <div class="form-group">
-              <label for="imei">IMEI No. </label>
-              <input type="text" class="form-control" required [(ngModel)]="model.imei" name="imei"  placeholder="IMEI">
-              </div>
+          <div class="form-group">
+            <label for="model">Model   </label>
+            <select   class="form-control" name="modelName" [(ngModel)]="model.modelName">
+            <option *ngFor="let phonemodel of phonemodels">{{phonemodel.modelName}}</option>
+            </select>
+          </div>
+          <div class="divider"></div>
+         
 
-              <div class="form-group">
-                <label for="costprice"> Cost </label>
-                <input type="text" class="form-control"  [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
-                </div>
-                <div class="divider mr-2"></div>
-              <div class="form-group">
-                <label for="instock">Check if in Stock</label>
-                <input type="checkbox" class="form-control"  [(ngModel)]="model.inStock" required name="inStock">
+          <div class="form-group">
+            <label for="imei">IMEI No. </label>
+            <input type="text" class="form-control" required [(ngModel)]="model.imei" name="imei"  placeholder="IMEI">
+            </div>
+
+            <div class="form-group">
+              <label for="costprice"> Cost </label>
+              <input type="text" class="form-control"  [(ngModel)]="model.cost" required name="cost"  placeholder="Price">
               </div>
-  
-              <div class="divider mr-3"></div>
-            <div class="form-group text-center mt-4" >
-              <button class="btn btn-success btn-lg" [disabled]="!inventoryForm.dirty" form="inventoryForm" type="submit" (click)="createInventory()">Save</button>
+              <div class="divider mr-2"></div>
+            <div class="form-group">
+              <label for="instock">Check if in Stock</label>
+              <input type="checkbox" class="form-control"  [(ngModel)]="model.inStock" required name="inStock">
+            </div>
+
+            <div class="divider mr-3"></div>
+          <div class="form-group text-center mt-4" >
+            <button class="btn btn-success btn-lg" [disabled]="!inventoryForm.dirty" form="inventoryForm" type="submit" (click)="createInventory()">Save</button>
+            </div>
+
+          </form> 
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">  
+      <thead>
+              <tr>
+                <th scope="col"></th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>
+                <th scope="col">Date</th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>  
+                <th scope="col">Store</th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>
+                <th scope="col">Brand Name</th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>
+                <th scope="col">Model</th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>
+                <th scope="col">IMEI</th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>
+                <th scope="col">Cost</th>
+                <div class="divider mr-4"></div>
+                <div class="divider mr-4"></div>
+                <th scope="col">In Stock</th>
+                
+                
+              </tr>
+            </thead>
+     <div class="row"  *ngFor="let inventory of inventories">
+         <form  method="POST" class="form-row" #editForm="ngForm">    
+          <table class="table table-striped">
+            <div class="row">
+              <div  class="col-9">
+                <tbody>
+                  <td></td> 
+                 <td>{{inventory.date |date}}</td>
+                 <td>{{inventory.storeName}}</td>
+                 <td>{{inventory.typeName}}</td>
+                 <td>{{inventory.modelName}}</td>
+                 <td>{{inventory.imei}}</td>
+                 <td>{{inventory.cost}}</td>   
+                 <td>{{inventory.inStock}}</td>   
+               </tbody>
               </div>
-  
-            </form> 
-  
+              
+              <div class="col-3">
+                <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/shop/edit', inventory]" >Edit</button>
+                <button class="btn btn-danger" form="editForm" type="submit" (click)="deleteInventory(inventory.id)">Delete <i class="fa fa-trash-o"></i></button>
+               </div> 
+                
+            </div>
+           
+          </table>
+
+         </form>
+
         </div>
       </div>
     </div>
-  
-    <div class="card">
-      <div class="card-body">  
-        <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <div class="divider mr-4"></div>
-                  <div class="divider mr-4"></div>
-                  <th scope="col">Date</th>
-                  <div class="divider mr-4"></div>
-                  <div class="divider mr-4"></div>  
-                  <th scope="col">Store</th>
-                  <div class="divider mr-4"></div>
-                  <div class="divider mr-4"></div>
-                  <th scope="col">Brand Name</th>
-                  <div class="divider mr-4"></div>
-                  <div class="divider mr-4"></div>
-                  <th scope="col">Model</th>
-                  <div class="divider mr-4"></div>
-                  <div class="divider mr-4"></div>
-                  <th scope="col">IMEI</th>
-                  <div class="divider mr-4"></div>
-                  <div class="divider mr-4"></div>
-                  <th scope="col">Cost</th>
-                  <div class="divider mr-4"></div>
-                  <div class="divider mr-4"></div>
-                  <th scope="col">In Stock</th>
-                  
-                  
-                </tr>
-              </thead>
-       <div class="row"  *ngFor="let inventory of inventories">
-           <form  method="POST" class="form-row" #editForm="ngForm">    
-            <table class="table table-striped">
-              <div class="row">
-                <div  class="col-9">
-                  <tbody>
-                    <td></td> 
-                   <td>{{inventory.date |date}}</td>
-                   <td>{{inventory.storeName}}</td>
-                   <td>{{inventory.typeName}}</td>
-                   <td>{{inventory.modelName}}</td>
-                   <td>{{inventory.imei}}</td>
-                   <td>{{inventory.cost}}</td>   
-                   <td>{{inventory.inStock}}</td>   
-                 </tbody>
-                </div>
-                
-                <div class="col-3">
-                  <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/shop/edit', inventory]" >Edit</button>
-                  <button class="btn btn-danger" form="editForm" type="submit" (click)="deleteInventory(inventory.id)">Delete <i class="fa fa-trash-o"></i></button>
-                 </div> 
-                  
-              </div>
-             
-            </table>
-
-           </form>
-
-          </div>
-        </div>
-        <div class="d-flex justify-content-center">
-          <pagination [boundaryLinks]="true"
-                      [totalItems]="pagination.totalItems"
-                      [itemsPerPage]="pagination.itemsPerPage"
-                      [(ngModel)]="pagination.currentPage"
-                      (pageChanged)= "pageChanged($event)"
-                   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-          </pagination>
-        </div>
-
-      </div>
 
 
 </div>

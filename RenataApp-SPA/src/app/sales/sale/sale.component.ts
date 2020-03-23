@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { SaleType } from '../../_models/saleType';
-import { PhoneType } from '../../_models/phoneType';
-import { PhoneModel } from '../../_models/phoneModel';
-import { UserService } from '../../_services/user.service';
-import { AlertifyService } from '../../_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
-import { Sale } from '../../_models/sale';
+import { SaleType } from 'src/app/_models/saleType';
+import { PhoneType } from 'src/app/_models/phoneType';
+import { PhoneModel } from 'src/app/_models/phoneModel';
+import { Sale } from 'src/app/_models/sale';
+import { UserService } from 'src/app/_services/user.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-sales',

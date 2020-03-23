@@ -23,7 +23,6 @@ phonemodels: PhoneModel[];
 phones: Phone[];
 model: any = {};
 bsConfig: Partial<BsDatepickerConfig>;
-@Output() phone: Phone;
 phoneParams: any = {};
 pagination: Pagination;
 

@@ -47,8 +47,8 @@ export const appRoutes: Routes = [
                            Sales: SaleListResolver },
                 canActivate: [AuthGuard]},
     {path: 'sale/edit', component: SaleEditComponent, canActivate: [AuthGuard]},
-    {path: 'inventory', component: InventoryComponent, resolve: {inventories: InventoryListResolver}, canActivate: [AuthGuard]},
+    {path: 'inventory/shop', component: InventoryComponent, resolve: {inventories: InventoryListResolver}, canActivate: [AuthGuard]},
+    {path: 'inventory/supply', component: SupplyReportComponent, resolve: {phones: PhoneListResolver}, canActivate: [AuthGuard]},
     {path: 'report/sale', component: SaleReportComponent, resolve: {sales: SaleListResolver}, canActivate: [AuthGuard]},
-    {path: 'report/supply', component: SupplyReportComponent, resolve: {phones: PhoneListResolver}, canActivate: [AuthGuard]},
     {path: '**', redirectTo: 'home', pathMatch : 'full'}
   ];

@@ -1,5 +1,53 @@
 <div class="card">
     <div class="card-body">
+
+      <form class="form-inline" #form="ngForm" (ngSubmit)="loadInventories()" novalidate>
+
+        <div class="form-group">
+          <label for="minAge">Store Name</label>
+          <input type="text" class="form-control ml-1" style="width: 70px">
+        </div>
+
+        <button type="submit"  class="btn btn-primary" style="margin-left:10px" (click)="loadInventories()">Filter</button>
+        <button type="button"  class="btn btn-info" style="margin-left:10px">In Stock</button>
+
+
+        <div class="col">
+          <div class="btn-group">
+            <button type="button" (click)="loadInventories()"class="btn btn-primary">All</button>
+          </div>
+        </div>
+
+      </form>
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>
+          <th scope="col">Date</th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>  
+          <th scope="col">Store</th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>
+          <th scope="col">Brand Name</th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>
+          <th scope="col">Model</th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>
+          <th scope="col">IMEI</th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>
+          <th scope="col">Cost</th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>
+          <th scope="col">In Stock</th>
+          
+          
+        </tr>
+      </thead>
+
         <div class="row"  *ngFor="let inventory of inventories">
             <form  method="POST" class="form-row" #editForm="ngForm">    
              <table class="table table-striped">
@@ -24,5 +72,6 @@
             </form>
  
            </div>
+
     </div>
 </div>
