@@ -9,11 +9,13 @@ import { Sale } from '../_models/sale';
 
 @Injectable()
 export class SaleListResolver implements Resolve<Sale[]> {
+pageNumber = 1;
+pageSize = 10;
 
   constructor(private userService: UserService, private alerfify: AlertifyService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Sale[]> {
-    return this.userService.getSales().pipe(
+    return this.userService.getSales(this.pageNumber, this.pageSize).pipe(
       catchError(error => {
         this.alerfify.error('Problem retrieving data');
         this.router.navigate(['/sale']);

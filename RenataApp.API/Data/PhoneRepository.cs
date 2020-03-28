@@ -143,7 +143,7 @@ namespace RenataApp.API.Data
             return phone;
         }
 
-            public async Task<PagedList<Phone>> GetPhones(PhoneParams phoneParams)
+        public async Task<PagedList<Phone>> GetPhones(PhoneParams phoneParams)
         {
             var phones =  _context.Phones.OrderByDescending(p => p.Id).AsQueryable();
 
@@ -167,12 +167,13 @@ namespace RenataApp.API.Data
         }
         
 
-        public async Task<IEnumerable<Inventory>> GetInventories()
+        public async Task<PagedList<Inventory>> GetInventories(InventoryParams inventoryParams)
         {
-            var invetories = await _context.Inventories.ToListAsync();
+            var inventories =  _context.Inventories.OrderByDescending(p => p.Id).AsQueryable();
 
-            return invetories;
+            return await PagedList<Inventory>.CreateAsync(inventories, inventoryParams.PageNumber, inventoryParams.PageSize);
         }
+ 
 
         public async Task<Sale> GetSale(int id)
         {
@@ -187,6 +188,15 @@ namespace RenataApp.API.Data
            var sales = await _context.Sales.ToListAsync();
 
            return sales;
+        }
+
+        
+
+        public async Task<PagedList<Sale>> GetSales(SaleParams saleParams)
+        {
+            var sales =  _context.Sales.OrderByDescending(p => p.Id).AsQueryable();
+
+            return await PagedList<Sale>.CreateAsync(sales, saleParams.PageNumber, saleParams.PageSize);
         }
     }
 }

@@ -171,9 +171,32 @@ getInventory(id): Observable<Inventory> {
   return this.http.get<Inventory>(this.baseUrl + 'inventories/' + id);
 }
 
-getInventories(): Observable<Inventory[]> {
-  return this.http.get<Inventory[]>(this.baseUrl + 'inventories');
+
+getInventories(page?, itemsPerPage?, inventoryParams?): Observable<PaginatedResult<Inventory[]>> {
+  const paginatedResult: PaginatedResult<Inventory[]> = new PaginatedResult<Inventory[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+
+
+  return this.http.get<Inventory[]>(this.baseUrl + 'inventories', {observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
 }
+
+
 
 createInventory(inventory: Inventory ) {
   inventory.userId = this.authService.decodedToken.nameid;
@@ -194,9 +217,31 @@ getSale(id): Observable<Sale> {
   return this.http.get<Sale>(this.baseUrl + 'sales/' + id);
 }
 
-getSales(): Observable<Sale[]> {
-  return this.http.get<Sale[]>(this.baseUrl + 'sales');
+
+getSales(page?, itemsPerPage?, saleParams?): Observable<PaginatedResult<Sale[]>> {
+  const paginatedResult: PaginatedResult<Sale[]> = new PaginatedResult<Sale[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+
+
+  return this.http.get<Sale[]>(this.baseUrl + 'sales', {observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
 }
+
 
 createSale(sale: Sale ) {
   sale.userId = this.authService.decodedToken.nameid;

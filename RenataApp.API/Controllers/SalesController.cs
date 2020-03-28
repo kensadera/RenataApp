@@ -26,14 +26,17 @@ namespace RenataApp.API.Controllers
 
         [HttpGet]
 
-        [HttpGet]
-
-        public async Task<IActionResult> GetSales()
+        public async Task<IActionResult> GetSales([FromQuery]SaleParams saleParams)
         {
 
-            var sales = await _repo.GetSales();
+            var sales = await _repo.GetSales(saleParams);
 
-            return Ok(sales);
+            var salesToReturn = _mapper.Map<IEnumerable<SaleForListDto>>(sales);
+
+             Response.AddPagination(sales.CurrentPage, sales.PageSize,
+                sales.TotalCount, sales.TotalPages);
+
+            return Ok(salesToReturn);
         }
         
         [HttpGet("{id}")]

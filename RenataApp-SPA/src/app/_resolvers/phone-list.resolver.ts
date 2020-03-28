@@ -10,7 +10,7 @@ import { Phone } from '../_models/phone';
 @Injectable()
 export class PhoneListResolver implements Resolve<Phone[]> {
   pageNumber = 1;
-  PageSize = 5;
+  PageSize = 10;
 
   constructor(private userService: UserService, private alerfify: AlertifyService, private router: Router) {}
 

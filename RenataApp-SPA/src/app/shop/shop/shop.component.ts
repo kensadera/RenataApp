@@ -8,6 +8,7 @@ import { PhoneType } from 'src/app/_models/phoneType';
 import { PhoneModel } from 'src/app/_models/phoneModel';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-shop',
@@ -21,7 +22,7 @@ phonemodels: PhoneModel[];
 inventories: Inventory[];
 model: any = {};
 bsConfig: Partial<BsDatepickerConfig>;
-
+pagination: Pagination;
 
 @ViewChild('inventoryForm', { static: true}) inventoryForm: NgForm;
 @ViewChild('editForm', { static: true}) editForm: NgForm;
@@ -35,25 +36,37 @@ unloadNotification($event: any) {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadInventories();
     this.bsConfig = { containerClass: 'theme-red'},
 
     this.route.data.subscribe(data => {
       this.stores = data.stores;
       this.phonetypes = data.phonetypes;
       this.phonemodels = data.phonemodels;
-    // this.inventories = data.inventories;
+
+      this.inventories = data.inventories.result;
+      this.pagination = data.inventories.pagination;
     });
 
   }
 
-    loadInventories() {
-      this.userService.getInventories().subscribe((inventories: Inventory[]) => {
-        this.inventories = inventories;
-      }, error => {
-        this.alertify.error(error);
-      });
-    }
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadInventories();
+  }
+
+  loadInventories() {
+    this.userService.getInventories(this.pagination.currentPage, this.pagination.itemsPerPage)
+    .subscribe(
+      (res: PaginatedResult<Inventory[]>) => {
+      this.inventories = res.result;
+      this.pagination = res.pagination;
+    },
+    error => {
+      this.alertify.error(error);
+    });
+  }
+
+
 
   createInventory(model) {
     this.userService.createInventory(this.model).subscribe(next => {

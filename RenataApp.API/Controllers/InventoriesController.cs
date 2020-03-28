@@ -25,12 +25,17 @@ namespace RenataApp.API.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> GetInventories()
+        public async Task<IActionResult> GetInventories([FromQuery]InventoryParams inventoryParams)
         {
 
-            var inventories = await _repo.GetInventories();
+            var inventories = await _repo.GetInventories(inventoryParams);
 
-            return Ok(inventories);
+            var inventoriesToReturn = _mapper.Map<IEnumerable<InventoryForListDto>>(inventories);
+
+             Response.AddPagination(inventories.CurrentPage, inventories.PageSize,
+                inventories.TotalCount, inventories.TotalPages);
+
+            return Ok(inventoriesToReturn);
         }
 
         [HttpGet("{id}")]

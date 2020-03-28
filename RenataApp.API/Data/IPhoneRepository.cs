@@ -30,9 +30,9 @@ namespace RenataApp.API.Data
         Task<Phone> GetPhone(int id);
         Task<PagedList<Phone>> GetPhones(PhoneParams phoneParams);
         Task<Inventory> GetInventory(int id);
-        Task<IEnumerable<Inventory>> GetInventories();
+        Task<PagedList<Inventory>> GetInventories(InventoryParams inventoryParams);
         Task<Sale> GetSale(int id);
-        Task<IEnumerable<Sale>> GetSales();
+        Task<PagedList<Sale>> GetSales(SaleParams saleParams);
       
     }
 }

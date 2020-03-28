@@ -10,6 +10,8 @@ namespace RenataApp.API.Helpers
         {
 
             CreateMap<Phone, PhoneForListDto>();
+            CreateMap<Inventory, InventoryForListDto>();
+            CreateMap<Sale, SaleForListDto>();
          
         
           

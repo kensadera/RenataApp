@@ -12,6 +12,7 @@ import { Pagination, PaginatedResult } from '../_models/pagination';
 })
 export class InventoryComponent implements OnInit {
   inventories: Inventory[];
+  pagination: Pagination;
 
 
   constructor(private userService: UserService,
@@ -19,17 +20,32 @@ export class InventoryComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-   this.loadInventories();
+
+    this.route.data.subscribe(data => {
+      this.inventories = data.inventories.result;
+      this.pagination = data.inventories.pagination;
+    });
 
   }
 
 
 
+
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadInventories();
+  }
+
   loadInventories() {
-    this.userService.getInventories().subscribe((inventories: Inventory[]) => {
-      this.inventories = inventories;
-    }, error => {
+    this.userService.getInventories(this.pagination.currentPage, this.pagination.itemsPerPage)
+    .subscribe(
+      (res: PaginatedResult<Inventory[]>) => {
+      this.inventories = res.result;
+      this.pagination = res.pagination;
+    },
+    error => {
       this.alertify.error(error);
     });
   }
+
 }

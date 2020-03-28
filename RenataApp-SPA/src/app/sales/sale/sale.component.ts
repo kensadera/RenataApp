@@ -8,6 +8,7 @@ import { PhoneModel } from 'src/app/_models/phoneModel';
 import { Sale } from 'src/app/_models/sale';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-sales',
@@ -21,6 +22,7 @@ phonemodels: PhoneModel[];
 sales: Sale[];
 model: any = {};
 bsConfig: Partial<BsDatepickerConfig>;
+pagination: Pagination;
 
 @ViewChild('saleForm', { static: true}) saleForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
@@ -37,13 +39,31 @@ constructor(private userService: UserService,
   ngOnInit() {
     this.bsConfig = { containerClass: 'theme-red'},
 
-    this.loadSales();
-
     this.route.data.subscribe(data => {
       this.saletypes = data.saletypes;
       this.phonetypes = data.phonetypes;
       this.phonemodels = data.phonemodels;
-     // this.sales = data.sales;
+
+      this.sales = data.sales.result;
+      this.pagination = data.sales.pagination;
+    });
+  }
+
+
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadSales();
+  }
+
+  loadSales() {
+    this.userService.getSales(this.pagination.currentPage, this.pagination.itemsPerPage)
+    .subscribe(
+      (res: PaginatedResult<Sale[]>) => {
+      this.sales = res.result;
+      this.pagination = res.pagination;
+    },
+    error => {
+      this.alertify.error(error);
     });
   }
 
@@ -57,13 +77,7 @@ constructor(private userService: UserService,
     });
   }
 
-  loadSales() {
-    this.userService.getSales().subscribe((sales: Sale[]) => {
-      this.sales = sales;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
+
 
   deleteSale(id: number) {
     this.alertify.confirm('Are you sure you want to delete the sales info?', () => {
