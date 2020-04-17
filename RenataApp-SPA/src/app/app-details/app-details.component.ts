@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PhoneType } from 'src/app/_models/phoneType';
+import { Supplier } from '../_models/supplier';
+import { PhoneModel } from '../_models/phoneModel';
 
 @Component({
   selector: 'app-app-detail',
@@ -13,18 +15,17 @@ import { PhoneType } from 'src/app/_models/phoneType';
 })
 export class AppDetailsComponent implements OnInit {
 phonetypes: PhoneType[];
+suppliers: Supplier[];
+phonemodels: PhoneModel[];
 model: any = {};
 
 @ViewChild('supplierForm', { static: true}) supplierForm: NgForm;
 @ViewChild('brandForm', { static: true}) brandForm: NgForm;
 @ViewChild('modelForm', { static: true}) modelForm: NgForm;
-@ViewChild('saleForm', { static: true}) saleForm: NgForm;
-@ViewChild('payForm', { static: true}) payForm: NgForm;
-@ViewChild('storeForm', { static: true}) storeForm: NgForm;
+@ViewChild('editForm', { static: true}) editForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
-  if (this.supplierForm.dirty || this.brandForm.dirty || this.modelForm.dirty ||
-    this.saleForm.dirty || this.payForm.dirty || this.storeForm.dirty) {
+  if (this.supplierForm.dirty || this.brandForm.dirty || this.modelForm.dirty) {
     $event.returnValue = true;
   }
 }
@@ -37,7 +38,9 @@ unloadNotification($event: any) {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
+      this.suppliers = data.suppliers;
       this.phonetypes = data.phonetypes;
+      this.phonemodels = data.phonemodels;
     });
   }
 
@@ -70,23 +73,46 @@ unloadNotification($event: any) {
     });
   }
 
-
-  createSaleType(model) {
-    this.userService.createSaleType(this.model).subscribe(next => {
-      this.alertify.success('Sale type added successfully');
-      this.saleForm.reset();
+  loadSuppliers() {
+    this.userService.getSuppliers().subscribe((suppliers: Supplier[]) => {
+      this.suppliers = suppliers;
     }, error => {
       this.alertify.error(error);
     });
   }
 
 
-  createStore(model) {
-    this.userService.createStore(this.model).subscribe(next => {
-      this.alertify.success('Storage location added successfully');
-      this.storeForm.reset();
-    }, error => {
-      this.alertify.error(error);
+  deleteSupplier(id: number) {
+    this.alertify.confirm('Are you sure you want to delete the supplier?', () => {
+      this.userService.deleteSupplier(id).subscribe(() => {
+        this.suppliers.slice(this.suppliers.findIndex(p => p.id === id), 1);
+        this.alertify.success('Supplier removed successfully');
+      }, error => {
+        this.alertify.error('failed to delele the supply details');
+      });
+    });
+  }
+
+  deletePhoneBrand(id: number) {
+    this.alertify.confirm('Are you sure you want to delete the phone brand?', () => {
+      this.userService.deletePhoneBrand(id).subscribe(() => {
+        this.phonetypes.slice(this.phonetypes.findIndex(p => p.id === id), 1);
+        this.alertify.success('Brand removed successfully');
+      }, error => {
+        this.alertify.error('failed to delele the brand ');
+      });
+    });
+  }
+
+
+  deletePhoneModel(id: number) {
+    this.alertify.confirm('Are you sure you want to delete the phone model?', () => {
+      this.userService.deletePhoneModel(id).subscribe(() => {
+        this.phonemodels.slice(this.phonemodels.findIndex(p => p.id === id), 1);
+        this.alertify.success('Model removed successfully');
+      }, error => {
+        this.alertify.error('failed to delele the model ');
+      });
     });
   }
 
@@ -95,9 +121,6 @@ unloadNotification($event: any) {
     this.supplierForm.reset(this.model);
     this.brandForm.reset(this.model);
     this.modelForm.reset(this.model);
-    this.saleForm.reset(this.model);
-    this.payForm.reset(this.model);
-    this.storeForm.reset(this.model);
   }
 
 

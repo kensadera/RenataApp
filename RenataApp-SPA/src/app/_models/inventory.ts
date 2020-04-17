@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Inventory {
     id: number;
     date: Date;
@@ -7,5 +9,6 @@ export interface Inventory {
     cost: any;
     imei: string;
     inStock: boolean;
+    user: User;
     userId: number;
 }

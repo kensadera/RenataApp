@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
-import { Store } from 'src/app/_models/store';
 import { Inventory } from 'src/app/_models/inventory';
 import { PhoneType } from 'src/app/_models/phoneType';
 import { PhoneModel } from 'src/app/_models/phoneModel';
@@ -16,7 +15,6 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-stores: Store[];
 phonetypes: PhoneType[];
 phonemodels: PhoneModel[];
 inventories: Inventory[];
@@ -39,7 +37,7 @@ unloadNotification($event: any) {
     this.bsConfig = { containerClass: 'theme-red'},
 
     this.route.data.subscribe(data => {
-      this.stores = data.stores;
+
       this.phonetypes = data.phonetypes;
       this.phonemodels = data.phonemodels;
 

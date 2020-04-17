@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Sale {
     id: number;
     date: Date;
@@ -8,5 +10,6 @@ export interface Sale {
     imei: string;
     order: string;
     isPaid: boolean;
+    user: User;
     userId: number;
 }

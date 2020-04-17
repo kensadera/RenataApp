@@ -15,9 +15,6 @@ namespace Renata.API.Data
     public DbSet<Payment> Payments { get; set; }
     public DbSet<PhoneModel> PhoneModels { get; set; }
     public DbSet<PhoneType> PhoneTypes { get; set; }
-    public DbSet<Store> Stores { get; set; }
-    public DbSet<SaleType> SaleTypes { get; set; }
-    public DbSet<PayType> PayTypes { get; set; }
     public DbSet<Phone> Phones { get; set; }
 
    

@@ -10,7 +10,7 @@ using Renata.API.Data;
 namespace Renata.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200312163445_ChangedEntries")]
+    [Migration("20200408210517_ChangedEntries")]
     partial class ChangedEntries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,24 +49,7 @@ namespace Renata.API.Migrations
                     b.Property<string>("TypeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Inventories");
-                });
-
-            modelBuilder.Entity("RenataApp.API.Models.PayType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PayName")
+                    b.Property<string>("User")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -76,7 +59,7 @@ namespace Renata.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PayTypes");
+                    b.ToTable("Inventories");
                 });
 
             modelBuilder.Entity("RenataApp.API.Models.Payment", b =>
@@ -126,6 +109,9 @@ namespace Renata.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -209,6 +195,9 @@ namespace Renata.API.Migrations
                     b.Property<string>("TypeName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -217,46 +206,6 @@ namespace Renata.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Sales");
-                });
-
-            modelBuilder.Entity("RenataApp.API.Models.SaleType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("SaleName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SaleTypes");
-                });
-
-            modelBuilder.Entity("RenataApp.API.Models.Store", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("StoreName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Stores");
                 });
 
             modelBuilder.Entity("RenataApp.API.Models.Supplier", b =>
@@ -302,17 +251,8 @@ namespace Renata.API.Migrations
 
             modelBuilder.Entity("RenataApp.API.Models.Inventory", b =>
                 {
-                    b.HasOne("RenataApp.API.Models.User", "User")
+                    b.HasOne("RenataApp.API.Models.User", null)
                         .WithMany("Inventories")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RenataApp.API.Models.PayType", b =>
-                {
-                    b.HasOne("RenataApp.API.Models.User", "User")
-                        .WithMany("PayTypes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -320,7 +260,7 @@ namespace Renata.API.Migrations
 
             modelBuilder.Entity("RenataApp.API.Models.Phone", b =>
                 {
-                    b.HasOne("RenataApp.API.Models.User", "User")
+                    b.HasOne("RenataApp.API.Models.User", null)
                         .WithMany("Phones")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -347,26 +287,8 @@ namespace Renata.API.Migrations
 
             modelBuilder.Entity("RenataApp.API.Models.Sale", b =>
                 {
-                    b.HasOne("RenataApp.API.Models.User", "User")
+                    b.HasOne("RenataApp.API.Models.User", null)
                         .WithMany("Sales")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RenataApp.API.Models.SaleType", b =>
-                {
-                    b.HasOne("RenataApp.API.Models.User", "User")
-                        .WithMany("SaleTypes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RenataApp.API.Models.Store", b =>
-                {
-                    b.HasOne("RenataApp.API.Models.User", "User")
-                        .WithMany("Stores")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -374,7 +296,7 @@ namespace Renata.API.Migrations
 
             modelBuilder.Entity("RenataApp.API.Models.Supplier", b =>
                 {
-                    b.HasOne("RenataApp.API.Models.User", "User")
+                    b.HasOne("RenataApp.API.Models.User", null)
                         .WithMany("Suppliers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

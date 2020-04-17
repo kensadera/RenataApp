@@ -25,6 +25,7 @@ model: any = {};
 bsConfig: Partial<BsDatepickerConfig>;
 phoneParams: any = {};
 pagination: Pagination;
+phone: Phone = JSON.parse(localStorage.getItem('phone'));
 
 
 @ViewChild('supplyForm', { static: true}) supplyForm: NgForm;
@@ -49,6 +50,7 @@ unloadNotification($event: any) {
 
       this.phones = data.phones.result;
       this.pagination = data.phones.pagination;
+
 
     });
 

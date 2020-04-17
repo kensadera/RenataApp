@@ -28,21 +28,21 @@
           <div class="divider mr-4"></div>
           <div class="divider mr-4"></div>  
           <th scope="col">Store</th>
-          <div class="divider mr-4"></div>
-          <div class="divider mr-4"></div>
+          <div class="divider mr-2"></div>  
           <th scope="col">Brand Name</th>
-          <div class="divider mr-4"></div>
-          <div class="divider mr-4"></div>
+          <div class="divider mr-2"></div>
           <th scope="col">Model</th>
           <div class="divider mr-4"></div>
-          <div class="divider mr-4"></div>
           <th scope="col">IMEI</th>
-          <div class="divider mr-4"></div>
-          <div class="divider mr-4"></div>
+          <div class="divider ml-4"></div>
+          <div class="divider ml-4"></div>
           <th scope="col">Cost</th>
           <div class="divider mr-4"></div>
           <div class="divider mr-4"></div>
           <th scope="col">In Stock</th>
+          <div class="divider mr-4"></div>
+          <div class="divider mr-4"></div>
+          <th scope="col">User</th>
           
           
         </tr>
@@ -58,10 +58,14 @@
                     <td>{{inventory.date |date}}</td>
                     <td>{{inventory.storeName}}</td>
                     <td>{{inventory.typeName}}</td>
+                    <div class="divider mr-4"></div>
+                    <div class="divider mr-4"></div>
                     <td>{{inventory.modelName}}</td>
                     <td>{{inventory.imei}}</td>
                     <td>{{inventory.cost}}</td>   
                     <td>{{inventory.inStock}}</td>   
+                    <td>{{inventory.user}}</td>   
+
                   </tbody>
                  </div>
                    

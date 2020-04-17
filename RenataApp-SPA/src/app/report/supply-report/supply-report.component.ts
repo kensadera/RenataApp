@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Supplier } from 'src/app/_models/supplier';
 import { Phone } from 'src/app/_models/phone';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-supply-report',
@@ -17,11 +18,15 @@ phone: Phone = JSON.parse(localStorage.getItem('phone'));
 phoneParams: any = {};
 pagination: Pagination;
 
+@ViewChild('ngForm', { static: true}) ngForm: NgForm;
+
+
 
 
   constructor(private userService: UserService,
               private alertify: AlertifyService,
               private route: ActivatedRoute) { }
+
   ngOnInit() {
 
     this.route.data.subscribe(data => {
@@ -29,8 +34,8 @@ pagination: Pagination;
       this.pagination = data.phones.pagination;
     });
 
-    this.phoneParams.supplierName = this.phone.supplierName === 'supplierName?' ;
-    this.phoneParams.orderBy = this.phone.date;
+    this.phoneParams.supplierName = this.phone.supplierName === 'supplierName';
+
   }
 
   pageChanged(event: any): void {
@@ -39,7 +44,7 @@ pagination: Pagination;
   }
 
   resetFilters() {
-  //  this.phoneParams.supplierName = this.phone.supplierName === 'supplierName?';
+ //  this.phoneParams.supplierName = this.phone.supplierName === 'supplierName?';
     this.loadPhones();
   }
 

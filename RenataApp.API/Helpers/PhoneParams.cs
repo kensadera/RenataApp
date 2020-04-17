@@ -17,10 +17,10 @@ namespace RenataApp.API.Helpers
         set { pageSize = (value > MaxPageSize) ? MaxPageSize: value ;}
     }
 
-    //  public int PhoneId { get; set; }
-    // public int MyProperty { get; set; }
-    //  public string SupplierName { get; set; }
-    //  public string  OrderBy { get; set; }
+  
+    public string OrderBy { get; set; }
+    public string SupplierName { get; set; }
+    
   
 
 

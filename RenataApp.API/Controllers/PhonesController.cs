@@ -33,6 +33,7 @@ namespace RenataApp.API.Controllers
 
             var phones = await _repo.GetPhones(phoneParams);
 
+
             var phonesToReturn = _mapper.Map<IEnumerable<PhoneForListDto>>(phones);
 
              Response.AddPagination(phones.CurrentPage, phones.PageSize,

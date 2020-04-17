@@ -95,8 +95,8 @@
                   
                 </tr>
               </thead>
-              <div class="row"  *ngFor="let phone of phones">
-                <form  method="POST" class="form-row" #editForm="ngForm">    
+              <div class="row"  *ngFor="let phone of phones" >
+                <form  method="POST" class="form-row" #editForm="ngForm" (ngSubmit)="loadPhones()" novalidate>    
                  <table class="table table-striped">
                    <div class="row">
                      <div  class="col-9">

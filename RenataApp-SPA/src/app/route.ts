@@ -10,8 +10,6 @@ import { SupplierListResolver } from './_resolvers/supplier-list.resolver';
 import { BrandListResolver } from './_resolvers/brand-list.resolver';
 import { ModelListResolver } from './_resolvers/model-list.resolver';
 import { PhoneListResolver } from './_resolvers/phone-list.resolver';
-import { StoreListResolver } from './_resolvers/store-list.resolver';
-import { SaleTypeListResolver } from './_resolvers/saletype-list.resolver';
 import { InventoryListResolver } from './_resolvers/inventory-list.resolver';
 import { SaleListResolver } from './_resolvers/sale-list.resolver';
 import { SupplyEditComponent } from './suppliers/supply-edit/supply-edit.component';
@@ -31,18 +29,20 @@ export const appRoutes: Routes = [
            canActivate: [AuthGuard]},
     {path: 'supply/edit', component: SupplyEditComponent, canActivate: [AuthGuard]},
     {path: 'detail/add', component: AppDetailsComponent,
-                resolve: {phonetypes: BrandListResolver},
+                resolve: {phonetypes: BrandListResolver,
+                          suppliers: SupplierListResolver,
+                          phonemodels: ModelListResolver
+                          },
                 canActivate: [AuthGuard]},
     {path: 'shop', component: ShopComponent,
-               resolve: { stores: StoreListResolver,
+               resolve: {
                           phonetypes: BrandListResolver,
                           phonemodels: ModelListResolver,
                           inventories: InventoryListResolver },
                canActivate: [AuthGuard]},
     {path: 'shop/edit', component: ShopEditComponent, canActivate: [AuthGuard]},
     {path: 'sales', component: SaleComponent,
-                resolve: { saletypes: SaleTypeListResolver,
-                           phonetypes: BrandListResolver,
+                resolve: { phonetypes: BrandListResolver,
                            phonemodels: ModelListResolver,
                            sales: SaleListResolver },
                 canActivate: [AuthGuard]},

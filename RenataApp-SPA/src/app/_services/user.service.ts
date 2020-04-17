@@ -8,8 +8,6 @@ import { User } from '../_models/user';
 import { AuthService } from './auth.service';
 import { PhoneType } from '../_models/phoneType';
 import { PhoneModel } from '../_models/phoneModel';
-import { SaleType } from '../_models/saleType';
-import { Store } from '../_models/store';
 import { Phone } from '../_models/phone';
 import { Inventory } from '../_models/inventory';
 import { Sale } from '../_models/sale';
@@ -26,11 +24,11 @@ export class UserService {
   baseUrl = environment.apiUrl;
   jwthelper = new JwtHelperService();
   decodedToken: any;
-  user: User;
   supplier: Supplier;
   phonetype: PhoneType;
   phonemodel: PhoneModel;
   userId = this.authService.decodedToken.nameid;
+  user = this.authService.decodedToken.unique_name;
   model: any = {};
 
 
@@ -51,10 +49,9 @@ getPhones(page?, itemsPerPage?, phoneParams?): Observable<PaginatedResult<Phone[
     params = params.append('pageSize', itemsPerPage);
   }
 
-  // if (phoneParams != null) {
-  //   params = params.append('phoneId', phoneParams.id);
-  //   params = params.append('orderBy', phoneParams.date);
-  // }
+  if (phoneParams != null) {
+     params = params.append('supplierName', phoneParams.supplierName);
+   }
 
   return this.http.get<Phone[]>(this.baseUrl + 'phones', {observe: 'response', params})
     .pipe(
@@ -76,6 +73,7 @@ getPhone(id): Observable<Phone> {
 
 createPhone(phone: Phone) {
   phone.userId = this.authService.decodedToken.nameid;
+  phone.user = this.authService.decodedToken.unique_name;
   return this.http.post(this.baseUrl + 'phones/', phone);
 }
 
@@ -104,6 +102,10 @@ createSupplier(supplier: Supplier ) {
   return this.http.post(this.baseUrl + 'suppliers/',  supplier );
 }
 
+deleteSupplier(id: number) {
+  return this.http.delete(this.baseUrl + 'suppliers/' + id);
+}
+
 
 
 getPhoneBrand(id): Observable<PhoneType> {
@@ -117,6 +119,10 @@ getPhoneBrands(): Observable<PhoneType[]> {
 createPhoneBrand(phonetype: PhoneType ) {
   phonetype.userId = this.authService.decodedToken.nameid;
   return this.http.post(this.baseUrl + 'brands/',  phonetype );
+}
+
+deletePhoneBrand(id: number) {
+  return this.http.delete(this.baseUrl + 'brands/' + id);
 }
 
 
@@ -134,33 +140,8 @@ createPhoneModel(phonemodel: PhoneModel ) {
    return this.http.post(this.baseUrl + 'models/',  phonemodel );
 }
 
-
-
-getSaleType(id): Observable<SaleType> {
-  return this.http.get<SaleType>(this.baseUrl + 'saletypes/' + id);
-}
-
-getSaleTypes(): Observable<SaleType[]> {
-  return this.http.get<SaleType[]>(this.baseUrl + 'saletypes');
-}
-
-createSaleType(saletype: SaleType ) {
-  saletype.userId = this.authService.decodedToken.nameid;
-  return this.http.post(this.baseUrl + 'saletypes/',  saletype );
-}
-
-
-getStore(id): Observable<Store> {
-  return this.http.get<Store>(this.baseUrl + 'stores/' + id);
-}
-
-getStores(): Observable<Store[]> {
-  return this.http.get<Store[]>(this.baseUrl + 'stores');
-}
-
-createStore(store: Store ) {
-  store.userId = this.authService.decodedToken.nameid;
-  return this.http.post(this.baseUrl + 'stores/',  store );
+deletePhoneModel(id: number) {
+  return this.http.delete(this.baseUrl + 'models/' + id);
 }
 
 
@@ -200,6 +181,7 @@ getInventories(page?, itemsPerPage?, inventoryParams?): Observable<PaginatedResu
 
 createInventory(inventory: Inventory ) {
   inventory.userId = this.authService.decodedToken.nameid;
+  inventory.user = this.authService.decodedToken.unique_name;
   return this.http.post(this.baseUrl + 'inventories/',  inventory );
 }
 
@@ -245,6 +227,7 @@ getSales(page?, itemsPerPage?, saleParams?): Observable<PaginatedResult<Sale[]>>
 
 createSale(sale: Sale ) {
   sale.userId = this.authService.decodedToken.nameid;
+  sale.user = this.authService.decodedToken.unique_name;
   return this.http.post(this.baseUrl + 'sales/',  sale );
 }
 updateSale(id: number, sale: Sale) {

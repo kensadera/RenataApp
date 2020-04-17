@@ -59,5 +59,20 @@ namespace RenataApp.API.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSupplier(int id)
+        {
+
+            var supplier = await _repo.GetSupplier(id);
+
+            _repo.Delete(supplier);
+
+            await _repo.SaveAll();
+            return NoContent();
+
+            throw new Exception($"Deleting supplier failed");
+        }
+
+
     }
 }

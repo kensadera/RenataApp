@@ -15,7 +15,7 @@ namespace RenataApp.API.Models
         public string Order { get; set; }
         public bool IsPaid { get; set; }
 
-        public  User User { get; set; }
+        public  string User { get; set; }
         public  int UserId { get; set; } 
         
     }

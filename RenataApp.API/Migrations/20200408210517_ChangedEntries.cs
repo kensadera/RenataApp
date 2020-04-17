@@ -15,6 +15,15 @@ namespace Renata.API.Migrations
                 name: "FK_Phones_Suppliers_SupplierId",
                 table: "Phones");
 
+            migrationBuilder.DropTable(
+                name: "PayTypes");
+
+            migrationBuilder.DropTable(
+                name: "SaleTypes");
+
+            migrationBuilder.DropTable(
+                name: "Stores");
+
             migrationBuilder.DropIndex(
                 name: "IX_Phones_PhoneTypeId",
                 table: "Phones");
@@ -102,6 +111,11 @@ namespace Renata.API.Migrations
                 table: "Sales",
                 nullable: true);
 
+            migrationBuilder.AddColumn<string>(
+                name: "User",
+                table: "Sales",
+                nullable: true);
+
             migrationBuilder.AddColumn<int>(
                 name: "UserId",
                 table: "Sales",
@@ -136,6 +150,11 @@ namespace Renata.API.Migrations
                 table: "Phones",
                 nullable: true);
 
+            migrationBuilder.AddColumn<string>(
+                name: "User",
+                table: "Phones",
+                nullable: true);
+
             migrationBuilder.AlterColumn<string>(
                 name: "Imei",
                 table: "Inventories",
@@ -161,6 +180,11 @@ namespace Renata.API.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "TypeName",
+                table: "Inventories",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "User",
                 table: "Inventories",
                 nullable: true);
 
@@ -221,6 +245,10 @@ namespace Renata.API.Migrations
                 table: "Sales");
 
             migrationBuilder.DropColumn(
+                name: "User",
+                table: "Sales");
+
+            migrationBuilder.DropColumn(
                 name: "UserId",
                 table: "Sales");
 
@@ -241,6 +269,10 @@ namespace Renata.API.Migrations
                 table: "Phones");
 
             migrationBuilder.DropColumn(
+                name: "User",
+                table: "Phones");
+
+            migrationBuilder.DropColumn(
                 name: "Date",
                 table: "Inventories");
 
@@ -254,6 +286,10 @@ namespace Renata.API.Migrations
 
             migrationBuilder.DropColumn(
                 name: "TypeName",
+                table: "Inventories");
+
+            migrationBuilder.DropColumn(
+                name: "User",
                 table: "Inventories");
 
             migrationBuilder.AddColumn<DateTime>(
@@ -331,6 +367,66 @@ namespace Renata.API.Migrations
                 type: "nvarchar(max)",
                 nullable: true);
 
+            migrationBuilder.CreateTable(
+                name: "PayTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PayTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PayTypes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SaleTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SaleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SaleTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SaleTypes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StoreName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stores_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Phones_PhoneTypeId",
                 table: "Phones",
@@ -340,6 +436,21 @@ namespace Renata.API.Migrations
                 name: "IX_Phones_SupplierId",
                 table: "Phones",
                 column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PayTypes_UserId",
+                table: "PayTypes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SaleTypes_UserId",
+                table: "SaleTypes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stores_UserId",
+                table: "Stores",
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Phones_PhoneTypes_PhoneTypeId",

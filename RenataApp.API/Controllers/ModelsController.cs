@@ -48,5 +48,19 @@ namespace RenataApp.API.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteModel(int id)
+        {
+
+            var model = await _repo.GetPhoneModel(id);
+
+            _repo.Delete(model);
+
+            await _repo.SaveAll();
+            return NoContent();
+
+            throw new Exception($"Deleting phone model failed");
+        }
+
     }
 }

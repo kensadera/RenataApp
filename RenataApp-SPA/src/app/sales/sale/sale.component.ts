@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
-import { SaleType } from 'src/app/_models/saleType';
 import { PhoneType } from 'src/app/_models/phoneType';
 import { PhoneModel } from 'src/app/_models/phoneModel';
 import { Sale } from 'src/app/_models/sale';
@@ -16,7 +15,6 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
   styleUrls: ['./sale.component.css']
 })
 export class SaleComponent implements OnInit {
-saletypes: SaleType[];
 phonetypes: PhoneType[];
 phonemodels: PhoneModel[];
 sales: Sale[];
@@ -40,7 +38,6 @@ constructor(private userService: UserService,
     this.bsConfig = { containerClass: 'theme-red'},
 
     this.route.data.subscribe(data => {
-      this.saletypes = data.saletypes;
       this.phonetypes = data.phonetypes;
       this.phonemodels = data.phonemodels;
 

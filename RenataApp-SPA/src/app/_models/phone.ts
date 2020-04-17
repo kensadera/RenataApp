@@ -1,3 +1,6 @@
+import { User } from './user';
+
+
 export interface Phone {
     id: number;
     date: Date;
@@ -6,5 +9,6 @@ export interface Phone {
     modelName: string;
     cost: any;
     imei: string;
+    user: User;
     userId: number;
 }

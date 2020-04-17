@@ -29,8 +29,6 @@ import { SupplierListResolver } from './_resolvers/supplier-list.resolver';
 import { BrandListResolver } from './_resolvers/brand-list.resolver';
 import { ModelListResolver } from './_resolvers/model-list.resolver';
 import { PhoneListResolver } from './_resolvers/phone-list.resolver';
-import { StoreListResolver } from './_resolvers/store-list.resolver';
-import { SaleTypeListResolver } from './_resolvers/saletype-list.resolver';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { InventoryListResolver } from './_resolvers/inventory-list.resolver';
 import { SaleListResolver } from './_resolvers/sale-list.resolver';
@@ -99,8 +97,6 @@ export function tokenGetter() {
       BrandListResolver,
       ModelListResolver,
       PhoneListResolver,
-      StoreListResolver,
-      SaleTypeListResolver,
       InventoryListResolver,
       SaleListResolver
 

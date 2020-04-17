@@ -7,18 +7,19 @@
 
         <div class="form-group">
           <label for="minAge">Supplier</label>
-          <input type="text" class="form-control ml-1" style="width: 70px" id="supplierName"
+          <input type="text" class="form-control ml-1" style="width: 70px"
           [(ngModel)]="phoneParams.supplierName"  name="supplierName?">
         </div>
 
-        <button type="submit"  class="btn btn-primary" style="margin-left:10px" (click)="loadPhones()">Filter</button>
-        <button type="button"  class="btn btn-info" (click)= "resetFilters()" style="margin-left:10px">Reset Filter</button>
+        <button type="submit" form="ngForm"   class="btn btn-primary" style="margin-left:10px" 
+            [(ngModel)]="phoneParams.supplierName"  name="supplierName"
+             (click)="loadPhones()">Filter</button>
+        <button type="button"  form="ngForm"  class="btn btn-info" (click)= "resetFilters()" style="margin-left:10px">Reset Filter</button>
 
 
         <div class="col">
           <div class="btn-group">
-            <button type="button" (click)="loadPhones()" name="orderBy" class="btn btn-primary"
-            [(ngModel)]="phoneParams.date"  btnRadio="date">All</button>
+            <button type="submit"  form="ngForm" (click)="loadPhones()" name="orderBy" class="btn btn-primary" btnRadio="date">All</button>
           </div>
         </div>
 
@@ -46,6 +47,8 @@
           <div class="divider mr-4"></div>
           <div class="divider mr-4"></div>
           <th scope="col">Cost</th>
+          <div class="divider mr-4"></div>
+          <th scope="col">User</th>
           
           
         </tr>
@@ -65,6 +68,7 @@
                <td>{{phone.modelName}}</td>
                <td>{{phone.imei}}</td>
                <td>{{phone.cost}}</td>   
+               <td>{{phone.user}}</td>   
              </tbody>
             </div> 
             

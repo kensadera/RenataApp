@@ -1,4 +1,5 @@
 using System;
+using RenataApp.API.Models;
 
 namespace RenataApp.API.Dtos
 {
@@ -11,7 +12,9 @@ namespace RenataApp.API.Dtos
         public string ModelName { get; set; }
         public string Imei { get; set; }
         public decimal Cost { get; set; }
-         public bool InStock { get; set; }
+        public bool InStock { get; set; }
+        public  string User { get; set; }
+        
         
     }
 

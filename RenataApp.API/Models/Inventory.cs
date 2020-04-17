@@ -13,7 +13,7 @@ namespace RenataApp.API.Models
         public string Imei { get; set; }
         public bool InStock { get; set; }
 
-        public  User User { get; set; }
+        public  string User { get; set; }
         public  int UserId { get; set; } 
     }
 }

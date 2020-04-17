@@ -12,8 +12,9 @@ namespace RenataApp.API.Dtos
         public string Imei { get; set; }
         public string Order { get; set; }
 
-        public decimal Cost { get; set; }
+        public decimal Price { get; set; }
         public bool IsPaid { get; set; }
+        public  string User { get; set; }
 
         
     }

@@ -49,6 +49,20 @@ namespace RenataApp.API.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBrand(int id)
+        {
+
+            var brand = await _repo.GetPhoneBrand(id);
+
+            _repo.Delete(brand);
+
+            await _repo.SaveAll();
+            return NoContent();
+
+            throw new Exception($"Deleting phone brand failed");
+        }
+
         
 
     }

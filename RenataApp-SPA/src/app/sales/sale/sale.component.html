@@ -16,7 +16,9 @@
           <div class="form-group">
             <label for="saleType">Sale Type </label>
             <select  class="form-control" [(ngModel)]="model.saleType" name="saleType">
-              <option *ngFor="let saletype of saletypes" >{{saletype.saleName}}</option>
+              <option id="1">Cash</option>
+              <option id="2" >Cheque</option>
+              <option id="3" >Credit</option>
             </select>
           </div>
 

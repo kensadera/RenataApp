@@ -89,63 +89,115 @@
 
 
 
-  
   <div class="col-4">
     <div class="card">
       <div class="card-body">
 
+        <div class="row"  *ngFor="let supplier of suppliers" >
+          <form  method="POST" class="form-row" #editForm="ngForm" (ngSubmit)="loadSuppliers()" novalidate>    
+           <table class="table table-striped">
+             <div class="row">
+               <div>
+                 <tbody>
+                   <td></td> 
+                  <td>{{supplier.name}}</td>      
+                </tbody>
+               </div>
+               <div class="divider mr-4"></div>
+               <div class="divider mr-4"></div>
+               <div>
+                 <button type="button" class="btn btn-primary" form="editForm" [routerLink]="['/supply/edit', supplier]" >Edit</button>
+                 <button class="btn btn-danger" form="editForm" type="submit" (click)="deleteSupplier(supplier.id)">Delete <i class="fa fa-trash-o"></i></button>
+                </div> 
+                 
+             </div>
 
-        <form method="post" #saleForm="ngForm" (ngSubmit)="createSaleType()">
-        
-
-          <h2 class="text-center text-primary">Add Sale Type</h2>
-          <hr>
-        
-          <div class="form-group">
-            <input type="text" class="form-control" required [(ngModel)]="model.salename" name="salename"   placeholder="Sale Type">
-          </div>
-      
-        
-          <div class="form-group text-center">
-            <button [disabled]="!saleForm.dirty" form="saleForm" class="btn btn-success" type="submit" (click)="createSaleType()">Add</button>
-            <button class="btn btn-default" type="button" (click)="cancel()"> Cancel </button>
-          </div>
+           
+            
+           </table>
 
           </form>
 
+         </div>
       </div>
     </div>
-  </div> 
+  </div>
 
 
- 
 
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
 
-<div class="col-4">
-  <div class="card">
-    <div class="card-body">
+        <div class="row"  *ngFor="let phonetype of phonetypes" >
+          <form  method="POST" class="form-row" #editForm="ngForm">    
+           <table class="table table-striped">
+             <div class="row">
+               <div>
+                 <tbody>
+                   <td></td> 
+                  <td>{{phonetype.typeName}}</td>      
+                </tbody>
+               </div>
+                <div class="divider ml-4"></div>
+                <div class="divider ml-4"></div>
+               <div>
+                 <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhoneBrand(phonetype.id)">Delete <i class="fa fa-trash-o"></i></button>
+                </div> 
+                 
+             </div>
 
-      <form method="post" #storeForm="ngForm" (ngSubmit)="createStore()">
-      
+           
+            
+           </table>
 
-        <h2 class="text-center text-primary">Add Storage location</h2>
-        <hr>
-      
-        <div class="form-group">
-          <input type="text" class="form-control" required [(ngModel)]="model.storename" name="storename"   placeholder="Store Name">
-        </div>
-    
-      
-        <div class="form-group text-center">
-          <button [disabled]="!storeForm.dirty" form="storeForm" class="btn btn-success" type="submit" (click)="createStore()">Add</button>
-          <button class="btn btn-default" type="button" (click)="cancel()"> Cancel </button>
-        </div>
+          </form>
 
-        </form>
-
+         </div>
+      </div>
     </div>
   </div>
-</div>
+
+
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row"  *ngFor="let phonemodel of phonemodels" >
+          <form  method="POST" class="form-row" #editForm="ngForm">    
+           <table class="table table-striped">
+             <div class="row">
+               <div>
+                 <tbody>
+                   <td></td> 
+                  <td>{{phonemodel.modelName}}</td>      
+                </tbody>
+               </div>
+                <div class="divider ml-4"></div>
+                <div class="divider ml-4"></div>
+               <div>
+                 <button class="btn btn-danger" form="editForm" type="submit" (click)="deletePhoneModel(phonemodel.id)">Delete <i class="fa fa-trash-o"></i></button>
+                </div> 
+                 
+             </div>
+
+           
+            
+           </table>
+
+          </form>
+
+         </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 
 
 
